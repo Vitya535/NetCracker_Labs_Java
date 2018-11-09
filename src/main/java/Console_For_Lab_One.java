@@ -24,5 +24,10 @@ class Console_For_Lab_One
         System.out.println(test_human.getAge());
         System.out.println(test_human);
         System.out.println(repository);
+        Human test_human_2 = new Human(2, "Кушнеренко", "Виктор", "Константинович", time);
+        repository.Add(test_human_2);
+        System.out.println(repository);
+        repository.Delete();
+        System.out.println(repository);
     }
 }

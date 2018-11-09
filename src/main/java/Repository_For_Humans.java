@@ -52,24 +52,21 @@ class Repository_For_Humans
 
     /**
      * Функция добавления в массив нового человека
+     * @param new_human - человек, который должен быть добавлен в массив
      */
-    public void Add()
+    void Add(Human new_human)
     {
-
+        Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + 1);
+        new_array_of_humans[array_of_humans.length] = new_human;
+        array_of_humans = new_array_of_humans;
     }
 
     /**
-     * Удаление человека из массива по индексу
-     * @param index - позиция человека в массиве
+     * Удаление человека из массива
      */
-    public void Delete_on_index(int index)
+    public void Delete()
     {
-
-    }
-
-    public void Delete_on_value()
-    {
-
+        array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length - 1);
     }
 
     /**
