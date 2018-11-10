@@ -27,7 +27,13 @@ class Console_For_Lab_One
         Human test_human_2 = new Human(2, "Кушнеренко", "Виктор", "Константинович", time);
         repository.Add(test_human_2);
         System.out.println(repository);
-        repository.Delete();
+        repository.Remove(test_human_2);
+        System.out.println(repository);
+        repository.RemoveAt(0);
+        System.out.println(repository);
+        repository.AddRange(new Human[] {test_human, test_human_2});
+        System.out.println(repository);
+        repository.AddRange(new Human[] {});
         System.out.println(repository);
     }
 }

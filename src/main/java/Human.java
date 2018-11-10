@@ -163,6 +163,10 @@ class Human
         return diff_year;
     }
 
+    /**
+     * Функция, представляющая строковое представление обьекта человека
+     * @return возвращает представление обьекта в виде строки
+     */
     @Override
     public String toString() {
         return "Human{" +
