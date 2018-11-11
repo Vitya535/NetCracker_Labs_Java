@@ -12,6 +12,11 @@ class Repository_For_Humans
 {
     /** поле с массивом из людей {@link Human}*/
     private Human[] array_of_humans;
+
+    /** статическое поле для задания новому человеку уникального ID */
+    private static int Id = 1;
+
+    /** поле для количества людей в репозитории */
     private int count;
 
     /**
@@ -43,7 +48,20 @@ class Repository_For_Humans
      */
     int Count()
     {
-        return array_of_humans.length;
+        return count;
+    }
+
+    /**
+     * Функция, проверяющая наличие человека в репозитории
+     * @param new_human - человек, которого необходимо проверить
+     * @return возвращает результат проверки
+     */
+    private boolean IsHumanInRepository(Human new_human)
+    {
+        for (Human human : array_of_humans)
+            if (human.equals(new_human) && human.hashCode() == new_human.hashCode())
+                return true;
+        return false;
     }
 
     /**
@@ -52,10 +70,14 @@ class Repository_For_Humans
      */
     void Add(Human new_human)
     {
-        Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + 1);
-        new_array_of_humans[array_of_humans.length] = new_human;
-        array_of_humans = new_array_of_humans;
-        count += 1;
+        if (!IsHumanInRepository(new_human)) {
+            new_human.setId(Id);
+            Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + 1);
+            new_array_of_humans[array_of_humans.length] = new_human;
+            array_of_humans = new_array_of_humans;
+            count++;
+            Id++;
+        }
     }
 
     /**
@@ -87,7 +109,7 @@ class Repository_For_Humans
             if (index != i)
                 new_array_of_humans[i] = array_of_humans[i];
         array_of_humans = new_array_of_humans;
-        count -= 1;
+        count--;
     }
 
     /**
@@ -101,7 +123,7 @@ class Repository_For_Humans
             if (index != i)
                 new_array_of_humans[i] = array_of_humans[i];
         array_of_humans = new_array_of_humans;
-        count -= 1;
+        count--;
     }
 
     /**

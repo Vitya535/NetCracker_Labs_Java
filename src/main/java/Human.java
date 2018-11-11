@@ -17,19 +17,19 @@ class Human
 {
     /**
      * Конструктор для создания человека
-     * @param id - ID
      * @param surname - фамилия
      * @param name - имя
      * @param patronymic - отчество
      * @param date_of_birth - дата рождения
+     * @param sex - пол человека
      */
-    Human(int id, String surname, String name, String patronymic, DateTime date_of_birth)
+    Human(String surname, String name, String patronymic, DateTime date_of_birth, Sex sex)
     {
-        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.date_of_birth = date_of_birth;
+        this.sex = sex;
     }
 
     /** поле id-шник */
@@ -134,6 +134,25 @@ class Human
         this.date_of_birth = date_of_birth;
     }
 
+    /** поле для определения пола человека */
+    private Sex sex;
+
+    /**
+     * Функция для получения пола человека
+     * @return возвращает пол человека
+     */
+    Sex getSex() {
+        return sex;
+    }
+
+    /**
+     * Функция для задания пола человека
+     * @param sex - пол, который задается человеку
+     */
+    void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     /**
      * Функция, возвращающая значение разности поля {@link Human#date_of_birth}
      * и нынешнего времени
@@ -157,9 +176,9 @@ class Human
 
         int diff_year = year_now - date_of_birth_year;
         if (month_now < date_of_birth_month)
-            diff_year-=1;
+            diff_year--;
         else if (year_now == date_of_birth_year && day_now > date_of_birth_day)
-            diff_year+=1;
+            diff_year++;
         return diff_year;
     }
 
@@ -171,10 +190,11 @@ class Human
     public String toString() {
         return "Human{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
-                ", date_of_birth=" + date_of_birth +
+                ", date_of_birth=" + date_of_birth + '\'' +
+                ", sex=" + sex +
                 '}';
     }
 
@@ -188,11 +208,11 @@ class Human
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return getId() == human.getId() &&
-                Objects.equals(getName(), human.getName()) &&
+        return Objects.equals(getName(), human.getName()) &&
                 Objects.equals(getSurname(), human.getSurname()) &&
                 Objects.equals(getPatronymic(), human.getPatronymic()) &&
-                Objects.equals(getDate_of_birth(), human.getDate_of_birth());
+                Objects.equals(getDate_of_birth(), human.getDate_of_birth()) &&
+                Objects.equals(getSex(), human.getSex());
     }
 
     /**
@@ -201,6 +221,6 @@ class Human
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurname(), getPatronymic(), getDate_of_birth());
+        return Objects.hash(getName(), getSurname(), getPatronymic(), getDate_of_birth(), getSex());
     }
 }
