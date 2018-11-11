@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Консольное приложение для работы с обьектами класса Human
  * и репозиторием, в котором они содержатся
  * @author Кушнеренко Виктор
- * @version 1.0
+ * @version 1.1
  */
 class Console_For_Lab_One
 {

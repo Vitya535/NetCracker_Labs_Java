@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Класс репозитория для людей {@link Human}
  * @author Кушнеренко Виктор
- * @version 1.0
+ * @version 1.1
  */
 class Repository_For_Humans
 {
