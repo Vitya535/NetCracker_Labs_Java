@@ -21,7 +21,7 @@ class Human
      * @param name - имя
      * @param patronymic - отчество
      * @param date_of_birth - дата рождения
-     * @param sex - пол человека
+     * @param sex - пол
      */
     Human(String surname, String name, String patronymic, DateTime date_of_birth, Sex sex)
     {

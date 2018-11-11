@@ -87,7 +87,7 @@ class Repository_For_Humans
     void AddRange(Human[] new_humans)
     {
         Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + new_humans.length);
-        System.arraycopy(new_humans, 0, new_array_of_humans, array_of_humans.length, array_of_humans.length + new_humans.length - array_of_humans.length);
+        System.arraycopy(new_humans, 0, new_array_of_humans, array_of_humans.length, new_humans.length);
         array_of_humans = new_array_of_humans;
         count += new_humans.length;
     }
