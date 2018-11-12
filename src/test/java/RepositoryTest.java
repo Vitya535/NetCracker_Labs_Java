@@ -5,6 +5,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+// ToDo - возможно надо будет поменять структуру тестов (версия у преподавателя 4.2)
+// ToDo - продолжать писать тесты
+
 /**
  * Unit-тесты через JUnit 5.2 для репозитория с людьми {@link RepositoryTest}
  * @author Кушнеренко Виктор
@@ -13,100 +16,100 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class RepositoryTest
 {
     /** приватное поле обьекта репозитория специально для тестов */
-    private static Repository_For_Humans repository;
+    private static RepositoryForHumans repository;
 
     /** инициализация данных для тестов */
     @BeforeAll
-    static void InitTest()
+    static void initTest()
     {
-        repository = new Repository_For_Humans();
+        repository = new RepositoryForHumans();
     }
 
     /** очищение обьекта репозитория после тестирования */
     @AfterAll
-    static void AfterTest()
+    static void afterTest()
     {
         repository = null;
     }
 
     /** тестирование функции добавления человека в репозиторий */
     @Test
-    void test_Add()
+    void testAdd()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
         System.out.println(repository);
     }
 
     /** тестирование функции добавления одного и того же человека */
     @RepeatedTest(2)
-    void test_Add_two_times()
+    void testAddTwoTimes()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
         System.out.println(repository);
     }
 
     /** тестирование функции добавления массива из людей */
     @Test
-    void test_AddRange()
+    void testAddRange()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth_1 = formatter.parseDateTime("14.05.1997");
-        Human new_human_1 = new Human("Семенов", "Семен", "Семенович", date_of_birth_1, Sex.MALE);
-        DateTime date_of_birth_2 = formatter.parseDateTime("12.10.1997");
-        Human new_human_2 = new Human("Семенов", "Семен", "Семенович", date_of_birth_2, Sex.MALE);
-        repository.AddRange(new Human[] {new_human_1, new_human_2});
+        DateTime dateOfBirth1 = formatter.parseDateTime("14.05.1997");
+        Human newHuman1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth1, Sex.MALE);
+        DateTime dateOfBirth2 = formatter.parseDateTime("12.10.1997");
+        Human newHuman2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth2, Sex.MALE);
+        repository.addRange(new Human[] {newHuman1, newHuman2});
         System.out.println(repository);
     }
 
     /** тестирование функции получения информации о человеке по индексу */
     @Test
-    void test_Get()
+    void testGet()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
-        repository.Get(0);
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
+        repository.get(0);
     }
 
     /** тестирование функции получения информации о человеке по несуществующему индексу */
     @Test
-    void test_Get_not_existing_human() throws ArrayIndexOutOfBoundsException
+    void testGetNotExistingHuman() throws ArrayIndexOutOfBoundsException
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
-        Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.Get(4));
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
+        Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.get(4));
         assertNotNull(thrown.getMessage());
     }
 
     /** тестирование функции удаления человека из репозитория */
     @Test
-    void test_RemoveAt()
+    void testRemoveAt()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
-        repository.RemoveAt(0);
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
+        repository.removeAt(0);
     }
 
     /** тестирование функции удаления несуществующего человека из репозитория */
     @Test
-    void test_RemoveAt_not_existing_human() throws ArrayIndexOutOfBoundsException
+    void testRemoveAtNotExistingHuman() throws ArrayIndexOutOfBoundsException
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        Human new_human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
-        repository.Add(new_human);
-        Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.RemoveAt(4));
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        repository.add(newHuman);
+        Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.removeAt(4));
         assertNotNull(thrown.getMessage());
     }
 }

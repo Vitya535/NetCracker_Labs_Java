@@ -3,31 +3,28 @@ import org.joda.time.Period;
 import java.util.Objects;
 import static java.lang.String.join;
 
-// ToDo - подумать над тем, как хранить ФИО
-// ToDo - подумать над получением возраста человека
-
 /**
  * Класс человека с id, ФИО, датой рождения,
  * возрастом
  * @author Кушнеренко Виктор
  * @version 1.1
  */
-class Human
+public class Human
 {
     /**
      * Конструктор для создания человека
      * @param surname - фамилия
      * @param name - имя
      * @param patronymic - отчество
-     * @param date_of_birth - дата рождения
+     * @param dateOfBirth - дата рождения
      * @param sex - пол
      */
-    Human(String surname, String name, String patronymic, DateTime date_of_birth, Sex sex)
+    public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Sex sex)
     {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.date_of_birth = date_of_birth;
+        this.dateOfBirth = dateOfBirth;
         this.sex = sex;
     }
 
@@ -38,7 +35,7 @@ class Human
      * Функция, возвращающая значение поля {@link Human#id}
      * @return возвращает ID человека
      */
-    int getId() {
+    public int getId() {
         return id;
     }
 
@@ -46,7 +43,7 @@ class Human
      * Функция для определения значения поля {@link Human#id}
      * @param id - новый ID человека
      */
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,7 +54,7 @@ class Human
      * Функция, возвращающая значение поля {@link Human#name}
      * @return возвращает имя человека
      */
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -65,7 +62,7 @@ class Human
      * Функция для определения значения поля {@link Human#name}
      * @param name - новое имя человека
      */
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -76,7 +73,7 @@ class Human
      * Функция, возвращающая значение поля {@link Human#surname}
      * @return возвращает фамилию человека
      */
-    String getSurname() {
+    public String getSurname() {
         return surname;
     }
 
@@ -84,7 +81,7 @@ class Human
      * Функция для определения значения поля {@link Human#surname}
      * @param surname - новая фамилия человека
      */
-    void setSurname(String surname) {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -95,7 +92,7 @@ class Human
      * Функция, возвращающая значение поля {@link Human#patronymic}
      * @return возвращает отчество человека
      */
-    String getPatronymic() {
+    public String getPatronymic() {
         return patronymic;
     }
 
@@ -103,7 +100,7 @@ class Human
      * Функция для определения значения поля {@link Human#patronymic}
      * @param patronymic - новое отчество человека
      */
-    void setPatronymic(String patronymic) {
+    public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
 
@@ -111,26 +108,26 @@ class Human
      * Функция, возвращающая значения полей {@link Human#surname}, {@link Human#name}, {@link Human#patronymic}
      * @return возвращает ФИО человека в именительном падеже
      */
-    String getFIO()
+    public String getFIO()
     {
         return join(" ", surname, name, patronymic);
     }
 
     /** поле для даты рождения */
-    private DateTime date_of_birth;
+    private DateTime dateOfBirth;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#date_of_birth}
+     * Функция, возвращающая значение поля {@link Human#dateOfBirth}
      * @return возвращает дату рождения человека
      */
-    DateTime getDate_of_birth() { return date_of_birth; }
+    public DateTime getDateOfBirth() { return dateOfBirth; } // подчеркивания !!!
 
     /**
-     * Функция для определения значения поля {@link Human#date_of_birth}
-     * @param date_of_birth - новая дата рождения человека
+     * Функция для определения значения поля {@link Human#dateOfBirth}
+     * @param dateOfBirth - новая дата рождения человека
      */
-    void setDate_of_birth(DateTime date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(DateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     /** поле для определения пола человека */
@@ -140,7 +137,7 @@ class Human
      * Функция для получения пола человека
      * @return возвращает пол человека
      */
-    Sex getSex() {
+    public Sex getSex() {
         return sex;
     }
 
@@ -148,19 +145,19 @@ class Human
      * Функция для задания пола человека
      * @param sex - пол, который задается человеку
      */
-    void setSex(Sex sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
     /**
-     * Функция, возвращающая значение разности поля {@link Human#date_of_birth}
+     * Функция, возвращающая значение разности поля {@link Human#dateOfBirth}
      * и нынешнего времени
      * @return возвращает возраст человека
      */
-    int getAge()
+    public int getAge()
     {
         DateTime now = DateTime.now();
-        Period difference = new Period(this.date_of_birth, now);
+        Period difference = new Period(this.dateOfBirth, now);
         return difference.getYears();
     }
 
@@ -175,7 +172,7 @@ class Human
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
-                ", date_of_birth=" + date_of_birth + '\'' +
+                ", dateOfBirth=" + dateOfBirth + '\'' +
                 ", sex=" + sex +
                 '}';
     }
@@ -193,7 +190,7 @@ class Human
         return Objects.equals(getName(), human.getName()) &&
                 Objects.equals(getSurname(), human.getSurname()) &&
                 Objects.equals(getPatronymic(), human.getPatronymic()) &&
-                Objects.equals(getDate_of_birth(), human.getDate_of_birth()) &&
+                Objects.equals(getDateOfBirth(), human.getDateOfBirth()) &&
                 Objects.equals(getSex(), human.getSex());
     }
 
@@ -203,6 +200,6 @@ class Human
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getPatronymic(), getDate_of_birth(), getSex());
+        return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getSex());
     }
 }

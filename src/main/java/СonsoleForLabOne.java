@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Кушнеренко Виктор
  * @version 1.1
  */
-class Console_For_Lab_One
+class ConsoleForLabOne
 {
     /**
      * точка входа нашего приложения
@@ -26,12 +26,12 @@ class Console_For_Lab_One
         System.out.println("4 - Получить всю информацию о человеке по индексу");
         System.out.println("5 - Выйти из приложения");
         Scanner scan = new Scanner(System.in);
-        Repository_For_Humans repository = new Repository_For_Humans();
+        RepositoryForHumans repository = new RepositoryForHumans();
         while(true)
         {
             System.out.print("Введите номер команды, которую вы хотите выполнить: ");
-            int number_of_command = scan.nextInt();
-            switch(number_of_command)
+            int numberOfCommand = scan.nextInt();
+            switch(numberOfCommand)
             {
                 case 1:
                     System.out.println("Команды, доступные для работы:");
@@ -50,21 +50,21 @@ class Console_For_Lab_One
                     String patronymic = scan.next();
                     System.out.print("Введите дату рождения человека: ");
                     DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-                    DateTime date_of_birth = formatter.parseDateTime(scan.next());
+                    DateTime dateOfBirth = formatter.parseDateTime(scan.next());
                     System.out.print("Введите пол человека (MALE - мужской, FEMALE - женский): ");
                     Sex sex = Sex.valueOf(scan.next());
-                    Human new_human = new Human(surname, name, patronymic, date_of_birth, sex);
-                    repository.Add(new_human);
+                    Human newHuman = new Human(surname, name, patronymic, dateOfBirth, sex);
+                    repository.add(newHuman);
                     break;
                 case 3:
                     System.out.print("Введите позицию человека в репозитории (начиная с 1): ");
-                    int index = scan.nextInt();
-                    repository.RemoveAt(index - 1);
+                    int removeIndex = scan.nextInt();
+                    repository.removeAt(removeIndex - 1);
                     break;
                 case 4:
                     System.out.print("Введите позицию человека в репозитории (начиная с 1): ");
-                    int get_index = scan.nextInt();
-                    String information = repository.Get(get_index - 1).toString();
+                    int getIndex = scan.nextInt();
+                    String information = repository.get(getIndex - 1).toString();
                     System.out.println(information);
                     break;
                 case 5:

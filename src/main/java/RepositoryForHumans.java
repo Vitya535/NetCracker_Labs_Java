@@ -1,18 +1,18 @@
-
-// ToDo - подумать над тем, как сделать расширяемый массив
-
 import java.util.Arrays;
 import java.util.stream.IntStream;
+
+// ToDo - сделать сортировку для репозитория
+// ToDo - сделать поиск для репозитория
 
 /**
  * Класс репозитория для людей {@link Human}
  * @author Кушнеренко Виктор
  * @version 1.1
  */
-class Repository_For_Humans
+public class RepositoryForHumans
 {
     /** поле с массивом из людей {@link Human}*/
-    private Human[] array_of_humans;
+    private Human[] arrayOfHumans;
 
     /** статическое поле для задания новому человеку уникального ID */
     private static int Id = 1;
@@ -23,11 +23,11 @@ class Repository_For_Humans
     /**
      * Конструктор для репозитория людей
      * Создает пустой массив
-     * @see Repository_For_Humans#Repository_For_Humans(Human[])
+     * @see RepositoryForHumans#RepositoryForHumans(Human[])
      */
-    Repository_For_Humans()
+    public RepositoryForHumans()
     {
-        array_of_humans = new Human[0];
+        arrayOfHumans = new Human[0];
         count = 0;
     }
 
@@ -35,11 +35,11 @@ class Repository_For_Humans
      * Конструктор для репозитория из людей
      * на основе некоторого массива
      * @param array - некоторый массив из людей
-     * @see Repository_For_Humans#Repository_For_Humans()
+     * @see RepositoryForHumans#RepositoryForHumans()
      */
-    Repository_For_Humans(Human[] array)
+    public RepositoryForHumans(Human[] array)
     {
-        array_of_humans = array;
+        arrayOfHumans = array;
         count = array.length;
     }
 
@@ -47,34 +47,34 @@ class Repository_For_Humans
      * Функция, возвращающая количество элементов в репозитории
      * @return возвращает количество элементов
      */
-    int Count()
+    public int Count()
     {
         return count;
     }
 
     /**
      * Функция, проверяющая наличие человека в репозитории
-     * @param new_human - человек, которого необходимо проверить
+     * @param newHuman - человек, которого необходимо проверить
      * @return возвращает результат проверки
      */
-    private boolean IsHumanInRepository(Human new_human)
+    private boolean isHumanInRepository(Human newHuman)
     {
-        return Arrays.stream(array_of_humans)
-                .anyMatch(human -> human.equals(new_human) && human.hashCode() == new_human.hashCode());
+        return Arrays.stream(arrayOfHumans)
+                .anyMatch(human -> human.equals(newHuman) && human.hashCode() == newHuman.hashCode());
     }
 
     /**
      * Функция добавления в конец репозитория нового человека
-     * @param new_human - человек, который должен быть добавлен в репозиторий
+     * @param newHuman - человек, который должен быть добавлен в репозиторий
      */
-    void Add(Human new_human)
+    public void add(Human newHuman)
     {
-        if (!IsHumanInRepository(new_human))
+        if (!isHumanInRepository(newHuman))
         {
-            new_human.setId(Id);
-            Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + 1);
-            new_array_of_humans[array_of_humans.length] = new_human;
-            array_of_humans = new_array_of_humans;
+            newHuman.setId(Id);
+            Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
+            newArrayOfHumans[arrayOfHumans.length] = newHuman;
+            arrayOfHumans = newArrayOfHumans;
             count++;
             Id++;
         }
@@ -82,30 +82,30 @@ class Repository_For_Humans
 
     /**
      * Функция добавления в конец репозитория нескольких новых людей
-     * @param new_humans - люди, которые должны быть добавлены в репозиторий
+     * @param newHumans - люди, которые должны быть добавлены в репозиторий
      */
-    void AddRange(Human[] new_humans)
+    public void addRange(Human[] newHumans)
     {
-        Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + new_humans.length);
-        System.arraycopy(new_humans, 0, new_array_of_humans, array_of_humans.length, new_humans.length);
-        array_of_humans = new_array_of_humans;
-        count += new_humans.length;
+        Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + newHumans.length);
+        System.arraycopy(newHumans, 0, newArrayOfHumans, arrayOfHumans.length, newHumans.length);
+        arrayOfHumans = newArrayOfHumans;
+        count += newHumans.length;
     }
 
     /**
      * Удаление первое вхождение обьекта человека из репозитория
-     * @param human_for_delete - обьект человека, который нужно удалить
+     * @param humanForDelete - обьект человека, который нужно удалить
      */
-    void Remove(Human human_for_delete)
+    public void remove(Human humanForDelete)
     {
-        int index = IntStream.range(0, array_of_humans.length)
-                .filter(i -> array_of_humans[i].equals(human_for_delete))
+        int index = IntStream.range(0, arrayOfHumans.length)
+                .filter(i -> arrayOfHumans[i].equals(humanForDelete))
                 .findFirst().orElse(-1);
-        Human[] new_array_of_humans = new Human[array_of_humans.length - 1];
-        IntStream.range(0, array_of_humans.length)
+        Human[] newArrayOfHumans = new Human[arrayOfHumans.length - 1];
+        IntStream.range(0, arrayOfHumans.length)
                 .filter(i -> index != i)
-                .forEach(i -> new_array_of_humans[i] = array_of_humans[i]);
-        array_of_humans = new_array_of_humans;
+                .forEach(i -> newArrayOfHumans[i] = arrayOfHumans[i]);
+        arrayOfHumans = newArrayOfHumans;
         count--;
     }
 
@@ -113,13 +113,13 @@ class Repository_For_Humans
      * Функция удаления человека из репозитория по указанному индексу
      * @param index - индекс, по которому необходимо удалить человека
      */
-    void RemoveAt(int index)
+    public void removeAt(int index)
     {
-        Human[] new_array_of_humans = new Human[array_of_humans.length - 1];
-        IntStream.range(0, array_of_humans.length)
+        Human[] newArrayOfHumans = new Human[arrayOfHumans.length - 1];
+        IntStream.range(0, arrayOfHumans.length)
                 .filter(i -> index != i)
-                .forEach(i -> new_array_of_humans[i] = array_of_humans[i]);
-        array_of_humans = new_array_of_humans;
+                .forEach(i -> newArrayOfHumans[i] = arrayOfHumans[i]);
+        arrayOfHumans = newArrayOfHumans;
         count--;
     }
 
@@ -128,9 +128,9 @@ class Repository_For_Humans
      * @param index - индекс, по которому необходимо получить человека
      * @return возвращает обьект человека из репозитория
      */
-    Human Get(int index)
+    public Human get(int index)
     {
-        return array_of_humans[index];
+        return arrayOfHumans[index];
     }
 
     /**
@@ -139,8 +139,8 @@ class Repository_For_Humans
      */
     @Override
     public String toString() {
-        return "Repository_For_Humans{" +
-                "array_of_humans=" + Arrays.toString(array_of_humans) +
+        return "RepositoryForHumans{" +
+                "arrayOfHumans=" + Arrays.toString(arrayOfHumans) +
                 '}';
     }
 
@@ -153,8 +153,8 @@ class Repository_For_Humans
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Repository_For_Humans that = (Repository_For_Humans) o;
-        return Arrays.equals(array_of_humans, that.array_of_humans);
+        RepositoryForHumans that = (RepositoryForHumans) o;
+        return Arrays.equals(arrayOfHumans, that.arrayOfHumans);
     }
 
     /**
@@ -163,6 +163,6 @@ class Repository_For_Humans
      */
     @Override
     public int hashCode() {
-        return Arrays.hashCode(array_of_humans);
+        return Arrays.hashCode(arrayOfHumans);
     }
 }

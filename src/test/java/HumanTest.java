@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// ToDo - возможно надо будет поменять структуру тестов (версия у преподвателя была 4.2)
+// ToDo - продолжать писать тесты
+
 /**
  * Unit-тесты через JUnit 5.2 для класса человека {@link HumanTest}
  * @author Кушнеренко Виктор
@@ -19,30 +22,30 @@ class HumanTest
 
     /** инициализация данных для тестов */
     @BeforeAll
-    static void InitTest()
+    static void initTest()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-        DateTime date_of_birth = formatter.parseDateTime("14.05.1997");
-        human = new Human("Семенов", "Семен", "Семенович", date_of_birth, Sex.MALE);
+        DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
+        human = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
     }
 
     /** очищение обьекта человека после тестирования */
     @AfterAll
-    static void AfterTest()
+    static void afterTest()
     {
         human = null;
     }
 
     /** тестирование функции получения возраста человека */
     @Test
-    void test_getAge()
+    void testGetAge()
     {
         assertEquals(21, human.getAge());
     }
 
     /** тестирование функции получения ID человека */
     @Test
-    void test_getId()
+    void testGetId()
     {
         int i = human.getId();
         System.out.println(i);
@@ -50,42 +53,42 @@ class HumanTest
 
     /** тестирование функции получения фамилии человека */
     @Test
-    void test_getSurname()
+    void testGetSurname()
     {
         assertEquals("Семенов", human.getSurname());
     }
 
     /** тестирование функции получения имени человека */
     @Test
-    void test_getName()
+    void testGetName()
     {
         assertEquals("Семен", human.getName());
     }
 
     /** тестирование функции получения отчества человека */
     @Test
-    void test_getPatronymic()
+    void testGetPatronymic()
     {
         assertEquals("Семенович", human.getPatronymic());
     }
 
     /** тестирование функции получения даты рождения человека */
     @Test
-    void test_getDate_of_birth()
+    void testGetDateOfBirth()
     {
-        System.out.println(human.getDate_of_birth());
+        System.out.println(human.getDateOfBirth());
     }
 
     /** тестирование функции получения ФИО человека */
     @Test
-    void test_getFIO()
+    void testGetFIO()
     {
         assertEquals("Семенов Семен Семенович", human.getFIO());
     }
 
     /** тестирование функции получения пола человека */
     @Test
-    void test_getSex()
+    void testGetSex()
     {
         assertEquals(Sex.MALE, human.getSex());
     }
