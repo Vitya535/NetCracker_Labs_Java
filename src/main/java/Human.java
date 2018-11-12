@@ -1,8 +1,7 @@
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import java.util.Objects;
-
 import static java.lang.String.join;
-// import org.joda.time.Period;
 
 // ToDo - подумать над тем, как хранить ФИО
 // ToDo - подумать над получением возраста человека
@@ -160,26 +159,9 @@ class Human
      */
     int getAge()
     {
-        // Period difference = new Period(this.date_of_birth, now);
-        // return difference.getYears(); - альтернативный вариант (через библиотеки)
-
-        // собственный вариант
         DateTime now = DateTime.now();
-        int year_now = now.getYear();
-        int date_of_birth_year = this.date_of_birth.getYear();
-
-        int month_now = now.getMonthOfYear();
-        int date_of_birth_month = this.date_of_birth.getMonthOfYear();
-
-        int day_now = now.getDayOfMonth();
-        int date_of_birth_day = this.date_of_birth.getDayOfMonth();
-
-        int diff_year = year_now - date_of_birth_year;
-        if (month_now < date_of_birth_month)
-            diff_year--;
-        else if (year_now == date_of_birth_year && day_now > date_of_birth_day)
-            diff_year++;
-        return diff_year;
+        Period difference = new Period(this.date_of_birth, now);
+        return difference.getYears();
     }
 
     /**

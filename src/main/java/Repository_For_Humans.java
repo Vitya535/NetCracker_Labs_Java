@@ -2,6 +2,7 @@
 // ToDo - подумать над тем, как сделать расширяемый массив
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * Класс репозитория для людей {@link Human}
@@ -58,10 +59,8 @@ class Repository_For_Humans
      */
     private boolean IsHumanInRepository(Human new_human)
     {
-        for (Human human : array_of_humans)
-            if (human.equals(new_human) && human.hashCode() == new_human.hashCode())
-                return true;
-        return false;
+        return Arrays.stream(array_of_humans)
+                .anyMatch(human -> human.equals(new_human) && human.hashCode() == new_human.hashCode());
     }
 
     /**
@@ -70,7 +69,8 @@ class Repository_For_Humans
      */
     void Add(Human new_human)
     {
-        if (!IsHumanInRepository(new_human)) {
+        if (!IsHumanInRepository(new_human))
+        {
             new_human.setId(Id);
             Human[] new_array_of_humans = Arrays.copyOf(array_of_humans, array_of_humans.length + 1);
             new_array_of_humans[array_of_humans.length] = new_human;
@@ -98,16 +98,13 @@ class Repository_For_Humans
      */
     void Remove(Human human_for_delete)
     {
-        int index = -1;
-        for (int i = 0; i < array_of_humans.length; i++)
-            if (array_of_humans[i].equals(human_for_delete)) {
-                index = i;
-                break;
-            }
+        int index = IntStream.range(0, array_of_humans.length)
+                .filter(i -> array_of_humans[i].equals(human_for_delete))
+                .findFirst().orElse(-1);
         Human[] new_array_of_humans = new Human[array_of_humans.length - 1];
-        for (int i = 0; i < array_of_humans.length; i++)
-            if (index != i)
-                new_array_of_humans[i] = array_of_humans[i];
+        IntStream.range(0, array_of_humans.length)
+                .filter(i -> index != i)
+                .forEach(i -> new_array_of_humans[i] = array_of_humans[i]);
         array_of_humans = new_array_of_humans;
         count--;
     }
@@ -119,9 +116,9 @@ class Repository_For_Humans
     void RemoveAt(int index)
     {
         Human[] new_array_of_humans = new Human[array_of_humans.length - 1];
-        for (int i = 0; i < array_of_humans.length; i++)
-            if (index != i)
-                new_array_of_humans[i] = array_of_humans[i];
+        IntStream.range(0, array_of_humans.length)
+                .filter(i -> index != i)
+                .forEach(i -> new_array_of_humans[i] = array_of_humans[i]);
         array_of_humans = new_array_of_humans;
         count--;
     }
