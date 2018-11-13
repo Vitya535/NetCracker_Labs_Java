@@ -112,4 +112,10 @@ class RepositoryTest
         Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.removeAt(4));
         assertNotNull(thrown.getMessage());
     }
+
+    @Test
+    void testFind()
+    {
+
+    }
 }

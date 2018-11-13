@@ -1,3 +1,5 @@
+import org.joda.time.DateTime;
+
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -131,6 +133,51 @@ public class RepositoryForHumans
     public Human get(int index)
     {
         return arrayOfHumans[index];
+    }
+
+    public void set(int index, Human human) { arrayOfHumans[index] = human; }
+
+    private void find(Checker checker, Object value)
+    {
+        for (Human human : arrayOfHumans) {
+            if (checker.check(human, value)){
+               System.out.println(human.toString());
+            }
+        }
+    }
+
+    // ToDo - применить полиморфизм к методам поиска (назвать их одинаково)
+
+    public void findOnFIO(String fio){
+        find(new HumanFIOChecker(), fio);
+    }
+
+    public void findOnName(String name) {
+        find(new HumanNameChecker(), name);
+    }
+
+    public void findOnSurname(String surname) {
+        find(new HumanSurnameChecker(), surname);
+    }
+
+    public void findOnPatronymic(String patronymic) {
+        find(new HumanPatronymicChecker(), patronymic);
+    }
+
+    public void findOnId(int id) {
+        find(new HumanIdChecker(), id);
+    }
+
+    public void findOnDateOfBirth(DateTime datetime){
+        find(new HumanDateOfBirthChecker(), datetime);
+    }
+
+    public void findOnSex(Sex sex) {
+        find(new HumanSexChecker(), sex);
+    }
+
+    public void findOnAge(int age) {
+        find(new HumanAgeChecker(), age);
     }
 
     /**

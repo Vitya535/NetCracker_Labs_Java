@@ -24,7 +24,9 @@ class ConsoleForLabOne
         System.out.println("2 - Добавить в репозиторий человека");
         System.out.println("3 - Удалить из репозитория человека");
         System.out.println("4 - Получить всю информацию о человеке по индексу");
-        System.out.println("5 - Выйти из приложения");
+        System.out.println("5 - Поиск человека по определенному параметру");
+        System.out.println("6 - Сортировка людей по определенному параметру");
+        System.out.println("7 - Выйти из приложения");
         Scanner scan = new Scanner(System.in);
         RepositoryForHumans repository = new RepositoryForHumans();
         while(true)
@@ -39,7 +41,9 @@ class ConsoleForLabOne
                     System.out.println("2 - Добавить в репозиторий человека");
                     System.out.println("3 - Удалить из репозитория человека");
                     System.out.println("4 - Получить всю информацию о человеке по индексу");
-                    System.out.println("5 - Выйти из приложения");
+                    System.out.println("5 - Поиск человека по определенному параметру");
+                    System.out.println("6 - Сортировка людей по определенному параметру");
+                    System.out.println("7 - Выйти из приложения");
                     break;
                 case 2:
                     System.out.print("Введите фамилию человека: ");
@@ -68,6 +72,15 @@ class ConsoleForLabOne
                     System.out.println(information);
                     break;
                 case 5:
+                    System.out.print("Введите номер параметра по которому вы хотите найти людей (1 - Имя, 2 - Фамилия, 3 - Отчество, 4 - ФИО (через пробелы), 5 - Дата рождения, 6 - Пол, 7 - ID, 8 - Возраст): ");
+                    int numberOfParameter = scan.nextInt();
+                    // еще кейсы чтоли? (что-то так себе)
+                    // ToDo - доделать консольный поиск
+                    break;
+                case 6:
+                    // ToDo - сделать консольную сортировку
+                    break;
+                case 7:
                     return;
             }
         }

@@ -9,7 +9,7 @@ import static java.lang.String.join;
  * @author Кушнеренко Виктор
  * @version 1.1
  */
-public class Human
+public class Human implements Comparable<Human>
 {
     /**
      * Конструктор для создания человека
@@ -201,5 +201,12 @@ public class Human
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getSex());
+    }
+
+
+    // ToDo - узнать: а по каким параметрам делать сортировку?
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 }
