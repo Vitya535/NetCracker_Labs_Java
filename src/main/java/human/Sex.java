@@ -1,7 +1,9 @@
+package human;
+
 /**
  * Перечисление для пола человека (мужского/женского)
  * @author Кушнеренко Виктор
  * @version 1.1
  */
 
-enum Sex {MALE, FEMALE}
+public enum Sex {MALE, FEMALE}

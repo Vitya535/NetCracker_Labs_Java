@@ -1,10 +1,14 @@
+package repository;
+
 import org.joda.time.DateTime;
+import checkers.*;
+import human.Human;
+import sorters.ShellSorter;
+import sorters.Sorter;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.IntStream;
-
-// ToDo - сделать сортировку для репозитория
-// ToDo - сделать поиск для репозитория
 
 /**
  * Класс репозитория для людей {@link Human}
@@ -22,6 +26,7 @@ public class RepositoryForHumans
     /** поле для количества людей в репозитории */
     private int count;
 
+    private Sorter sorter;
     /**
      * Конструктор для репозитория людей
      * Создает пустой массив
@@ -31,6 +36,14 @@ public class RepositoryForHumans
     {
         arrayOfHumans = new Human[0];
         count = 0;
+        sorter = new ShellSorter();
+    }
+
+    public RepositoryForHumans(Sorter new_sorter)
+    {
+        arrayOfHumans = new Human[0];
+        count = 0;
+        sorter = new_sorter;
     }
 
     /**
@@ -43,6 +56,14 @@ public class RepositoryForHumans
     {
         arrayOfHumans = array;
         count = array.length;
+        sorter = new ShellSorter();
+    }
+
+    public RepositoryForHumans(Human[] array, Sorter new_sorter)
+    {
+        arrayOfHumans = array;
+        count = array.length;
+        sorter = new_sorter;
     }
 
     /**
@@ -137,47 +158,31 @@ public class RepositoryForHumans
 
     public void set(int index, Human human) { arrayOfHumans[index] = human; }
 
-    private void find(Checker checker, Object value)
+    private RepositoryForHumans find(Checker checker, Object value)
     {
+        RepositoryForHumans findHumans = new RepositoryForHumans();
         for (Human human : arrayOfHumans) {
             if (checker.check(human, value)){
-               System.out.println(human.toString());
+               findHumans.add(human);
             }
         }
+        return findHumans;
     }
 
-    // ToDo - применить полиморфизм к методам поиска (назвать их одинаково)
-
-    public void findOnFIO(String fio){
-        find(new HumanFIOChecker(), fio);
+    public RepositoryForHumans findOn(String surname) {
+        return find(new HumanSurnameChecker(), surname);
     }
 
-    public void findOnName(String name) {
-        find(new HumanNameChecker(), name);
+    public RepositoryForHumans findOn(DateTime datetime){
+        return find(new HumanDateOfBirthChecker(), datetime);
     }
 
-    public void findOnSurname(String surname) {
-        find(new HumanSurnameChecker(), surname);
+    public RepositoryForHumans findOn(int age) {
+        return find(new HumanAgeChecker(), age);
     }
 
-    public void findOnPatronymic(String patronymic) {
-        find(new HumanPatronymicChecker(), patronymic);
-    }
-
-    public void findOnId(int id) {
-        find(new HumanIdChecker(), id);
-    }
-
-    public void findOnDateOfBirth(DateTime datetime){
-        find(new HumanDateOfBirthChecker(), datetime);
-    }
-
-    public void findOnSex(Sex sex) {
-        find(new HumanSexChecker(), sex);
-    }
-
-    public void findOnAge(int age) {
-        find(new HumanAgeChecker(), age);
+    public void sortBy(Comparator<Human> comparator) {
+        sorter.sort(this, comparator);
     }
 
     /**
@@ -186,7 +191,7 @@ public class RepositoryForHumans
      */
     @Override
     public String toString() {
-        return "RepositoryForHumans{" +
+        return "repository.RepositoryForHumans{" +
                 "arrayOfHumans=" + Arrays.toString(arrayOfHumans) +
                 '}';
     }

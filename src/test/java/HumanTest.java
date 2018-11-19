@@ -4,6 +4,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import human.Human;
+import human.Sex;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

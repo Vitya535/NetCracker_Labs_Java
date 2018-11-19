@@ -1,5 +1,8 @@
+package human;
+
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+
 import java.util.Objects;
 import static java.lang.String.join;
 
@@ -9,7 +12,7 @@ import static java.lang.String.join;
  * @author Кушнеренко Виктор
  * @version 1.1
  */
-public class Human implements Comparable<Human>
+public class Human
 {
     /**
      * Конструктор для создания человека
@@ -167,7 +170,7 @@ public class Human implements Comparable<Human>
      */
     @Override
     public String toString() {
-        return "Human{" +
+        return "human.Human{" +
                 "id=" + id +
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
@@ -191,7 +194,7 @@ public class Human implements Comparable<Human>
                 Objects.equals(getSurname(), human.getSurname()) &&
                 Objects.equals(getPatronymic(), human.getPatronymic()) &&
                 Objects.equals(getDateOfBirth(), human.getDateOfBirth()) &&
-                Objects.equals(getSex(), human.getSex());
+                getSex() == human.getSex();
     }
 
     /**
@@ -201,12 +204,5 @@ public class Human implements Comparable<Human>
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getSex());
-    }
-
-
-    // ToDo - узнать: а по каким параметрам делать сортировку?
-    @Override
-    public int compareTo(Human o) {
-        return name.compareTo(o.getName());
     }
 }

@@ -1,11 +1,19 @@
+package consoleapp;
+
+import comparers.HumanAgeComparer;
+import comparers.HumanDateOfBirthComparer;
+import comparers.HumanSurnameComparer;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import human.Human;
+import human.Sex;
+import repository.RepositoryForHumans;
 
 import java.util.Scanner;
 
 /**
- * Консольное приложение для работы с обьектами класса Human
+ * Консольное приложение для работы с обьектами класса human.Human
  * и репозиторием, в котором они содержатся
  * @author Кушнеренко Виктор
  * @version 1.1
@@ -28,6 +36,7 @@ class ConsoleForLabOne
         System.out.println("6 - Сортировка людей по определенному параметру");
         System.out.println("7 - Выйти из приложения");
         Scanner scan = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
         RepositoryForHumans repository = new RepositoryForHumans();
         while(true)
         {
@@ -53,7 +62,6 @@ class ConsoleForLabOne
                     System.out.print("Введите отчество человека: ");
                     String patronymic = scan.next();
                     System.out.print("Введите дату рождения человека: ");
-                    DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
                     DateTime dateOfBirth = formatter.parseDateTime(scan.next());
                     System.out.print("Введите пол человека (MALE - мужской, FEMALE - женский): ");
                     Sex sex = Sex.valueOf(scan.next());
@@ -72,13 +80,48 @@ class ConsoleForLabOne
                     System.out.println(information);
                     break;
                 case 5:
-                    System.out.print("Введите номер параметра по которому вы хотите найти людей (1 - Имя, 2 - Фамилия, 3 - Отчество, 4 - ФИО (через пробелы), 5 - Дата рождения, 6 - Пол, 7 - ID, 8 - Возраст): ");
-                    int numberOfParameter = scan.nextInt();
-                    // еще кейсы чтоли? (что-то так себе)
-                    // ToDo - доделать консольный поиск
+                    System.out.print("Введите значение по которому вы хотите найти людей (1 - Фамилия, 2 - Дата рождения, 3 - Возраст): ");
+                    int searchIndex = scan.nextInt();
+                    switch(searchIndex)
+                    {
+                        case 1:
+                            System.out.print("Введите фамилию: ");
+                            String findSurname = scan.next();
+                            System.out.println(repository.findOn(findSurname).toString());
+                            break;
+                        case 2:
+                            System.out.print("Введите дату рождения: ");
+                            DateTime findDateOfBirth = formatter.parseDateTime(scan.next());
+                            System.out.println(repository.findOn(findDateOfBirth).toString());
+                            break;
+                        case 3:
+                            System.out.print("Введите возраст: ");
+                            int findAge = scan.nextInt();
+                            System.out.println(repository.findOn(findAge).toString());
+                            break;
+                    }
                     break;
                 case 6:
-                    // ToDo - сделать консольную сортировку
+                    System.out.print("Введите значение по которому вы хотите отсортировать людей (1 - Фамилия, 2 - Дата рождения, 3 - Возраст): ");
+                    int sortIndex = scan.nextInt();
+                    switch (sortIndex)
+                    {
+                        case 1:
+                            System.out.println(repository.toString());
+                            repository.sortBy(new HumanSurnameComparer());
+                            System.out.println(repository.toString());
+                            break;
+                        case 2:
+                            System.out.println(repository.toString());
+                            repository.sortBy(new HumanDateOfBirthComparer());
+                            System.out.println(repository.toString());
+                            break;
+                        case 3:
+                            System.out.println(repository.toString());
+                            repository.sortBy(new HumanAgeComparer());
+                            System.out.println(repository.toString());
+                            break;
+                    }
                     break;
                 case 7:
                     return;
