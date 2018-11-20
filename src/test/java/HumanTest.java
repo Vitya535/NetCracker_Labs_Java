@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // ToDo - продолжать писать тесты
 
 /**
- * Unit-тесты через JUnit 5.2 для класса человека {@link HumanTest}
+ * Unit-тесты через JUnit 4.2 для класса человека {@link Human}
  * @author Кушнеренко Виктор
- * @version 1.1
+ * @version 1.2
  */
 class HumanTest
 {

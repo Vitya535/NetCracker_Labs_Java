@@ -10,7 +10,7 @@ import static java.lang.String.join;
  * Класс человека с id, ФИО, датой рождения,
  * возрастом
  * @author Кушнеренко Виктор
- * @version 1.1
+ * @version 1.2
  */
 public class Human
 {

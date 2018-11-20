@@ -1,8 +1,8 @@
 package consoleapp;
 
-import comparers.HumanAgeComparer;
-import comparers.HumanDateOfBirthComparer;
-import comparers.HumanSurnameComparer;
+import comparers.HumanAgeComparator;
+import comparers.HumanDateOfBirthComparator;
+import comparers.HumanSurnameComparator;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Консольное приложение для работы с обьектами класса human.Human
  * и репозиторием, в котором они содержатся
  * @author Кушнеренко Виктор
- * @version 1.1
+ * @version 1.2
  */
 class ConsoleForLabOne
 {
@@ -108,17 +108,17 @@ class ConsoleForLabOne
                     {
                         case 1:
                             System.out.println(repository.toString());
-                            repository.sortBy(new HumanSurnameComparer());
+                            repository.sortBy(new HumanSurnameComparator());
                             System.out.println(repository.toString());
                             break;
                         case 2:
                             System.out.println(repository.toString());
-                            repository.sortBy(new HumanDateOfBirthComparer());
+                            repository.sortBy(new HumanDateOfBirthComparator());
                             System.out.println(repository.toString());
                             break;
                         case 3:
                             System.out.println(repository.toString());
-                            repository.sortBy(new HumanAgeComparer());
+                            repository.sortBy(new HumanAgeComparator());
                             System.out.println(repository.toString());
                             break;
                     }

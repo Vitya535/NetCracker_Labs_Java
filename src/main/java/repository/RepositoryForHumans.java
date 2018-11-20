@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  * Класс репозитория для людей {@link Human}
  * @author Кушнеренко Виктор
- * @version 1.1
+ * @version 1.2
  */
 public class RepositoryForHumans
 {
@@ -26,11 +26,15 @@ public class RepositoryForHumans
     /** поле для количества людей в репозитории */
     private int count;
 
+    /** поле для обьекта класса сортировщика {@link Sorter}*/
     private Sorter sorter;
+
     /**
      * Конструктор для репозитория людей
-     * Создает пустой массив
+     * Создает пустой массив с сортировщиком Шелла по умолучанию
      * @see RepositoryForHumans#RepositoryForHumans(Human[])
+     * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
+     * @see RepositoryForHumans#RepositoryForHumans(Sorter)
      */
     public RepositoryForHumans()
     {
@@ -39,6 +43,14 @@ public class RepositoryForHumans
         sorter = new ShellSorter();
     }
 
+    /**
+     * Конструктор для репозитория людей
+     * Создает пустой массив с сортировщиком new_sorter
+     * @param new_sorter - сортировщик, задающийся репозиторию
+     * @see RepositoryForHumans#RepositoryForHumans(Human[])
+     * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
+     * @see RepositoryForHumans#RepositoryForHumans()
+     */
     public RepositoryForHumans(Sorter new_sorter)
     {
         arrayOfHumans = new Human[0];
@@ -49,8 +61,11 @@ public class RepositoryForHumans
     /**
      * Конструктор для репозитория из людей
      * на основе некоторого массива
+     * с сортировщиком Шелла по умолчанию
      * @param array - некоторый массив из людей
      * @see RepositoryForHumans#RepositoryForHumans()
+     * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
+     * @see RepositoryForHumans#RepositoryForHumans(Sorter)
      */
     public RepositoryForHumans(Human[] array)
     {
@@ -59,6 +74,16 @@ public class RepositoryForHumans
         sorter = new ShellSorter();
     }
 
+    /**
+     * Конструктор для репозитория из людей
+     * на основе некоторого массива
+     * с сортировщиком new_sorter
+     * @param array - некоторый массив из людей
+     * @param new_sorter - сортировщик, задающийся репозиторию
+     * @see RepositoryForHumans#RepositoryForHumans()
+     * @see RepositoryForHumans#RepositoryForHumans(Sorter)
+     * @see RepositoryForHumans#RepositoryForHumans(Human[])
+     */
     public RepositoryForHumans(Human[] array, Sorter new_sorter)
     {
         arrayOfHumans = array;
@@ -73,6 +98,22 @@ public class RepositoryForHumans
     public int Count()
     {
         return count;
+    }
+
+    /**
+     * Функция, возвращающая обьект сортировщика репозитория {@link Sorter}
+     * @return возвращает сортировщик репозитория
+     */
+    public Sorter getSorter() {
+        return sorter;
+    }
+
+    /**
+     * Функция, задающая обьект сортировщика репозитория {@link Sorter}
+     * @param sorter - новый сортировщик репозитория
+     */
+    public void setSorter(Sorter sorter) {
+        this.sorter = sorter;
     }
 
     /**
@@ -156,8 +197,20 @@ public class RepositoryForHumans
         return arrayOfHumans[index];
     }
 
+    /**
+     * Функция для задания нового человека в репозиторий по указанному индексу
+     * @param index - индекс, по которому необходимо задать человека
+     * @param human - новый человек который задается по индексу (index)
+     */
     public void set(int index, Human human) { arrayOfHumans[index] = human; }
 
+    /**
+     * Функция нахождения человека по конкретному
+     * значению некоторого параметра
+     * @param checker - обьект чекера, который ищет человека по значению конкретного параметра {@link Checker}
+     * @param value - значение параметра, по которому мы сопоставляем каждого человека в репозитории
+     * @return возвращает новый репозиторий из найденных людей
+     */
     private RepositoryForHumans find(Checker checker, Object value)
     {
         RepositoryForHumans findHumans = new RepositoryForHumans();
@@ -169,18 +222,48 @@ public class RepositoryForHumans
         return findHumans;
     }
 
+    /**
+     * Функция-обертка для поиска людей по фамилии
+     * @see RepositoryForHumans#find(Checker, Object)
+     * @see RepositoryForHumans#findOn(DateTime)
+     * @see RepositoryForHumans#findOn(int)
+     * @param surname - значение фамилии, по которой мы ищем человека
+     * @return возвращает новый репозиторий из найденных людей
+     */
     public RepositoryForHumans findOn(String surname) {
         return find(new HumanSurnameChecker(), surname);
     }
 
+    /**
+     * Функция-обертка для поиска людей по дате рождения
+     * @see RepositoryForHumans#find(Checker, Object)
+     * @see RepositoryForHumans#findOn(String)
+     * @see RepositoryForHumans#findOn(int)
+     * @param datetime - значение даты рождения, по которой мы ищем человека
+     * @return возвращает новый репозиторий из найденных людей
+     */
     public RepositoryForHumans findOn(DateTime datetime){
         return find(new HumanDateOfBirthChecker(), datetime);
     }
 
+    /**
+     * Функция-обертка для поиска людей по их возрасту
+     * @see RepositoryForHumans#find(Checker, Object)
+     * @see RepositoryForHumans#findOn(String)
+     * @see RepositoryForHumans#findOn(DateTime)
+     * @param age - значение возраста, по которому мы ищем человека
+     * @return возвращает новый репозиторий из найденных людей
+     */
     public RepositoryForHumans findOn(int age) {
         return find(new HumanAgeChecker(), age);
     }
 
+    /**
+     * Фукнция-обертка для сортировки людей по определенному значению
+     * некоторого параметра
+     * @param comparator - компаратор, по которому будут сортироваться люди {@link Comparator}
+     * @see Sorter#sort(RepositoryForHumans, Comparator)
+     */
     public void sortBy(Comparator<Human> comparator) {
         sorter.sort(this, comparator);
     }

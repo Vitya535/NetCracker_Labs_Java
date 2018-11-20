@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 // ToDo - продолжать писать тесты
 
 /**
- * Unit-тесты через JUnit 5.2 для репозитория с людьми {@link RepositoryTest}
+ * Unit-тесты через JUnit 4.2 для репозитория с людьми {@link RepositoryForHumans}
  * @author Кушнеренко Виктор
- * @version 1.1
+ * @version 1.2
  */
 class RepositoryTest
 {
