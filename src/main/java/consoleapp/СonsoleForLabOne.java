@@ -3,11 +3,11 @@ package consoleapp;
 import comparers.HumanAgeComparator;
 import comparers.HumanDateOfBirthComparator;
 import comparers.HumanSurnameComparator;
+import human.Human;
+import human.Sex;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import human.Human;
-import human.Sex;
 import repository.RepositoryForHumans;
 
 import java.util.Scanner;

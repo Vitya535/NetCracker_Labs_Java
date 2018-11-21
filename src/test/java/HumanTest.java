@@ -1,19 +1,16 @@
+import human.Human;
+import human.Sex;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import human.Human;
-import human.Sex;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// ToDo - возможно надо будет поменять структуру тестов (версия у преподвателя была 4.2)
-// ToDo - продолжать писать тесты
-
 /**
- * Unit-тесты через JUnit 4.2 для класса человека {@link Human}
+ * Unit-тесты через JUnit 5.2 для класса человека {@link Human}
  * @author Кушнеренко Виктор
  * @version 1.2
  */
@@ -42,56 +39,72 @@ class HumanTest
     @Test
     void testGetAge()
     {
-        assertEquals(21, human.getAge());
+        int actual = human.getAge();
+        int expected = 21;
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения ID человека */
     @Test
     void testGetId()
     {
-        int i = human.getId();
-        System.out.println(i);
+        int actual = human.getId();
+        int expected = 0; // значение по умолчанию, которое присваивается человеку после инициализации
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения фамилии человека */
     @Test
     void testGetSurname()
     {
-        assertEquals("Семенов", human.getSurname());
+        String actual = human.getSurname();
+        String expected = "Семенов";
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения имени человека */
     @Test
     void testGetName()
     {
-        assertEquals("Семен", human.getName());
+        String actual = human.getName();
+        String expected = "Семен";
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения отчества человека */
     @Test
     void testGetPatronymic()
     {
-        assertEquals("Семенович", human.getPatronymic());
+        String actual = human.getPatronymic();
+        String expected = "Семенович";
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения даты рождения человека */
     @Test
     void testGetDateOfBirth()
     {
-        System.out.println(human.getDateOfBirth());
+        DateTime actual = human.getDateOfBirth();
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+        DateTime expected = formatter.parseDateTime("14.05.1997");
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения ФИО человека */
     @Test
     void testGetFIO()
     {
-        assertEquals("Семенов Семен Семенович", human.getFIO());
+        String actual = human.getFIO();
+        String expected = "Семенов Семен Семенович";
+        assertEquals(expected, actual);
     }
 
     /** тестирование функции получения пола человека */
     @Test
     void testGetSex()
     {
-        assertEquals(Sex.MALE, human.getSex());
+        Sex actual = human.getSex();
+        Sex expected = Sex.MALE;
+        assertEquals(expected, actual);
     }
 }

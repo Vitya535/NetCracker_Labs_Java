@@ -1,10 +1,14 @@
 package repository;
 
-import org.joda.time.DateTime;
-import checkers.*;
+import checkers.Checker;
+import checkers.HumanAgeChecker;
+import checkers.HumanDateOfBirthChecker;
+import checkers.HumanSurnameChecker;
 import human.Human;
+import org.joda.time.DateTime;
 import sorters.ShellSorter;
 import sorters.Sorter;
+import utils.Utils;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -21,7 +25,7 @@ public class RepositoryForHumans
     private Human[] arrayOfHumans;
 
     /** статическое поле для задания новому человеку уникального ID */
-    private static int Id = 1;
+    private int id = 1;
 
     /** поле для количества людей в репозитории */
     private int count;
@@ -128,6 +132,18 @@ public class RepositoryForHumans
     }
 
     /**
+     * Функция добавления в конец репозитория уже существующего человека
+     * сделано для использования в поиске {@link RepositoryForHumans#find(Checker, Object)}
+     * @param existingHuman - человек, который должен быть добавлен в репозиторий
+     */
+    private void addExistingHuman(Human existingHuman) {
+        Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
+        newArrayOfHumans[arrayOfHumans.length] = existingHuman;
+        arrayOfHumans = newArrayOfHumans;
+        count++;
+    }
+
+    /**
      * Функция добавления в конец репозитория нового человека
      * @param newHuman - человек, который должен быть добавлен в репозиторий
      */
@@ -135,12 +151,12 @@ public class RepositoryForHumans
     {
         if (!isHumanInRepository(newHuman))
         {
-            newHuman.setId(Id);
+            newHuman.setId(id);
             Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
             newArrayOfHumans[arrayOfHumans.length] = newHuman;
             arrayOfHumans = newArrayOfHumans;
             count++;
-            Id++;
+            id++;
         }
     }
 
@@ -150,10 +166,8 @@ public class RepositoryForHumans
      */
     public void addRange(Human[] newHumans)
     {
-        Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + newHumans.length);
-        System.arraycopy(newHumans, 0, newArrayOfHumans, arrayOfHumans.length, newHumans.length);
-        arrayOfHumans = newArrayOfHumans;
-        count += newHumans.length;
+        for (Human newHuman : newHumans)
+            this.add(newHuman);
     }
 
     /**
@@ -165,12 +179,7 @@ public class RepositoryForHumans
         int index = IntStream.range(0, arrayOfHumans.length)
                 .filter(i -> arrayOfHumans[i].equals(humanForDelete))
                 .findFirst().orElse(-1);
-        Human[] newArrayOfHumans = new Human[arrayOfHumans.length - 1];
-        IntStream.range(0, arrayOfHumans.length)
-                .filter(i -> index != i)
-                .forEach(i -> newArrayOfHumans[i] = arrayOfHumans[i]);
-        arrayOfHumans = newArrayOfHumans;
-        count--;
+        removeAt(index);
     }
 
     /**
@@ -179,11 +188,8 @@ public class RepositoryForHumans
      */
     public void removeAt(int index)
     {
-        Human[] newArrayOfHumans = new Human[arrayOfHumans.length - 1];
-        IntStream.range(0, arrayOfHumans.length)
-                .filter(i -> index != i)
-                .forEach(i -> newArrayOfHumans[i] = arrayOfHumans[i]);
-        arrayOfHumans = newArrayOfHumans;
+        arrayOfHumans = Utils.concat(Arrays.copyOfRange(arrayOfHumans, 0, index),
+                        Arrays.copyOfRange(arrayOfHumans, index + 1, arrayOfHumans.length));
         count--;
     }
 
@@ -202,7 +208,13 @@ public class RepositoryForHumans
      * @param index - индекс, по которому необходимо задать человека
      * @param human - новый человек который задается по индексу (index)
      */
-    public void set(int index, Human human) { arrayOfHumans[index] = human; }
+    public void set(int index, Human human) {
+        //int newId = arrayOfHumans[index].getId();
+        if (human.getId() == 0)
+            human.setId(arrayOfHumans[index].getId());
+        arrayOfHumans[index] = human;
+        //arrayOfHumans[index].setId(newId);
+    }
 
     /**
      * Функция нахождения человека по конкретному
@@ -216,7 +228,7 @@ public class RepositoryForHumans
         RepositoryForHumans findHumans = new RepositoryForHumans();
         for (Human human : arrayOfHumans) {
             if (checker.check(human, value)){
-               findHumans.add(human);
+               findHumans.addExistingHuman(human);
             }
         }
         return findHumans;
