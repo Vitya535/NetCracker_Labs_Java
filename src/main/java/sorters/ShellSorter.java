@@ -6,19 +6,19 @@ import repository.RepositoryForHumans;
 import java.util.Comparator;
 
 /**
- * Класс сортировщика Шелла для репозитория {@link RepositoryForHumans}
+ * ShellSorter Class for repository {@link RepositoryForHumans}
  * @see BubbleSorter
  * @see InsertSorter
  * @see Sorter
- * @author Кушнеренко Виктор
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class ShellSorter implements Sorter {
 
     /**
-     * Функция сортировки Шелла людей в репозитории
-     * @param repository - репозиторий, который мы хотим отсортировать {@link RepositoryForHumans}
-     * @param comparator - компаратор, по которому мы хотим сортировать людей {@link Comparator}
+     * Function for shellsort people in repository
+     * @param repository - repository, which we want to sort {@link RepositoryForHumans}
+     * @param comparator - comparator, by which we want to sort people {@link Comparator}
      * @see BubbleSorter#sort(RepositoryForHumans, Comparator)
      * @see InsertSorter#sort(RepositoryForHumans, Comparator)
      * @see Sorter#sort(RepositoryForHumans, Comparator)
@@ -28,7 +28,7 @@ public class ShellSorter implements Sorter {
         int step = 5;
         while (step > 0) {
             int j;
-            for (int i = step; i < repository.Count(); i++) {
+            for (int i = step; i < repository.count(); i++) {
                 Human human = repository.get(i);
                 for (j = i - step; j >= 0 && comparator.compare(repository.get(j), human) >= 0; j -= step) {
                     repository.set(j + step, repository.get(j));

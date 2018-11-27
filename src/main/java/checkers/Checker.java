@@ -3,21 +3,21 @@ package checkers;
 import human.Human;
 
 /**
- * Интерфейс Checker для поиска людей в
- * репозитории по определенному параметру
+ * Interface Checker for finding people in
+ * repository on definite parameter
  * @see HumanAgeChecker
  * @see HumanDateOfBirthChecker
  * @see HumanSurnameChecker
- * @author Кушнеренко Виктор
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public interface Checker
 {
     /**
-     * Сигнатура метода для поиска людей
-     * @param findHuman - человек, которого мы ищем {@link Human}
-     * @param value - значение некоторого параметра, по которому мы его ищем
-     * @return возвращает boolean-значение, обозначающее тот ли это человек, которого мы ищем или нет
+     * Signature of method for finding people
+     * @param findHuman - human, who we find {@link Human}
+     * @param value - value of some parameter, by which we find people
+     * @return returns boolean value, which define is that human who we find or not
      * @see HumanAgeChecker#check(Human, Object)
      * @see HumanSurnameChecker#check(Human, Object)
      * @see HumanDateOfBirthChecker#check(Human, Object)

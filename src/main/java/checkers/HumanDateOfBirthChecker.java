@@ -3,25 +3,25 @@ package checkers;
 import human.Human;
 
 /**
- * Класс для поиска людей в репозитории
- * по возрасту
+ * Class for finding people in repository
+ * on date of birth
  * @see Checker
  * @see HumanAgeChecker
  * @see HumanSurnameChecker
- * @author Кушнеренко Виктор
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class HumanDateOfBirthChecker implements Checker
 {
     /**
-     * Перекрытие метода check для поиска людей в репозитории
-     * по дате рождения
+     * Override method check for finding people in repository
+     * on date of birth
      * @see Checker#check(Human, Object)
      * @see HumanAgeChecker#check(Human, Object)
      * @see HumanSurnameChecker#check(Human, Object)
-     * @param findHuman - человек, которого мы ищем {@link Human}
-     * @param value - значение некоторого параметра, по которому мы его ищем
-     * @return возвращает boolean-значение, обозначающее тот ли это человек, которого мы ищем или нет
+     * @param findHuman - human, who we find {@link Human}
+     * @param value - value of some parameter, by which we find him
+     * @return returns boolean value, which define is that human who we find or not
      */
     @Override
     public boolean check(Human findHuman, Object value) {

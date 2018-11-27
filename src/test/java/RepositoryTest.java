@@ -1,8 +1,8 @@
 import comparers.HumanAgeComparator;
 import comparers.HumanDateOfBirthComparator;
 import comparers.HumanSurnameComparator;
+import human.Gender;
 import human.Human;
-import human.Sex;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -17,79 +17,79 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Unit-тесты через JUnit 5.2 для репозитория с людьми {@link RepositoryForHumans}
- * @author Кушнеренко Виктор
+ * Unit-tests on JUnit 5.2 for repository with humans {@link RepositoryForHumans}
+ * @author Kushnerenko Victor
  * @version 1.2
  */
-class RepositoryTest
-{
-    /** приватное поле обьекта репозитория специально для тестов */
+class RepositoryTest {
+
+    /** private field for object of repository special for tests */
     private static RepositoryForHumans repository;
+
+    /** private field for object of datetimeformatter special for tests */
     private static DateTimeFormatter formatter;
 
-    /** инициализация данных для тестов */
+    /** initializing data for tests */
     @BeforeAll
-    static void initTest()
-    {
+    static void initTest() {
         formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     }
 
-    /** очищение обьекта репозитория после тестирования */
+    /** clear objects after all tests */
     @AfterAll
-    static void afterTest()
-    {
+    static void afterTest() {
         repository = null;
         formatter = null;
     }
 
-    /** инициализация репозитория перед каждым тестом */
+    /** initializing repository before each test */
     @BeforeEach
     void beforeEachTest() {
         repository = new RepositoryForHumans();
     }
 
-    /** распечатка репозитория после каждого теста */
+    /** printing repository after each test */
     @AfterEach
     void afterEachTest() {
         System.out.println(repository);
         repository = null;
     }
 
-    /** тестирование функции Count при добавлении одинаковых людей */
+    /** testing count function at addition similar people */
     @Test
     void testCountWithSameHumans() {
         int expected = 1;
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
-        int actual = repository.Count();
+        int actual = repository.count();
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции Count при добавлении разных людей */
+    /** testing count function at addition different people */
     @Test
     void testCountWithDifferentHumans() {
         int expected = 3;
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
-        int actual = repository.Count();
+        int actual = repository.count();
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения сортировщика */
+    /** testing function getting sorter */
     @Test
     void testGetSorter() {
         Sorter expected = new ShellSorter();
@@ -98,7 +98,7 @@ class RepositoryTest
         System.out.println(actual);
     }
 
-    /** тестирование функции задания сортировщика */
+    /** testing function setting sorter */
     @Test
     void testSetSorter() {
         Sorter expected = new BubbleSorter();
@@ -108,468 +108,460 @@ class RepositoryTest
         System.out.println(actual);
     }
 
-    /** тестирование функции добавления человека в репозиторий */
+    /** testing function - add human to repository */
     @Test
-    void testAdd()
-    {
+    void testAdd() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
     }
 
-    /** тестирование функции добавления одного и того же человека */
+    /** testing function - add similar humans to repository */
     @Test
-    void testAddSameHumans()
-    {
+    void testAddSameHumans() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
     }
 
-    /** тестирование функции добавления разных людей */
+    /** testing function - add different humans to repository */
     @Test
     void testAddDifferentHumans() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
     }
 
 
-    /** тестирование функции добавления массива из разных людей */
+    /** testing function - add array of different humans to repository */
     @Test
-    void testAddRangeDifferentHumans()
-    {
+    void testAddRangeDifferentHumans() {
         DateTime dateOfBirth1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth1, Sex.MALE);
+        Human newHuman1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth1, Gender.MALE);
         DateTime dateOfBirth2 = formatter.parseDateTime("12.10.1997");
-        Human newHuman2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth2, Sex.MALE);
-        repository.addRange(new Human[] {newHuman1, newHuman2});
+        Human newHuman2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth2, Gender.MALE);
+        repository.addRange(new Human[]{newHuman1, newHuman2});
     }
 
-    /** тестирование функции добавления массива из одинаковых людей */
+    /** testing function - add array of similar humans to repository */
     @Test
-    void testAddRangeSimilarHumans()
-    {
+    void testAddRangeSimilarHumans() {
         DateTime dateOfBirth1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth1, Sex.MALE);
+        Human newHuman1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth1, Gender.MALE);
         DateTime dateOfBirth2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth2, Sex.MALE);
-        repository.addRange(new Human[] {newHuman1, newHuman2});
+        Human newHuman2 = new Human("Семенов", "Семен", "Семенович", dateOfBirth2, Gender.MALE);
+        repository.addRange(new Human[]{newHuman1, newHuman2});
     }
 
-    /** тестирование функции удаления конкретного человека */
+    /** testing function - remove concrete human */
     @Test
     void testRemove() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
-        repository.remove(new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE));
+        repository.remove(new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE));
     }
 
-    /** тестирование функции удаления конкретного несуществующего человека */
+    /** testing function - remove concrete not existing human */
     @Test
     void testRemoveNotExistingHuman() throws Exception {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
-        Human newHuman_4 = new Human("Пупкин", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         Throwable thrown = Assertions.assertThrows(Exception.class, () -> repository.remove(newHuman_4));
         assertNotNull(thrown.getMessage());
     }
 
-    /** тестирование функции удаления человека из репозитория */
+    /** testing function - remove concrete human on index */
     @Test
-    void testRemoveAt()
-    {
+    void testRemoveAt() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.removeAt(0);
     }
 
-    /** тестирование функции удаления несуществующего человека из репозитория */
+    /** testing function - remove concrete not existing human on index */
     @Test
-    void testRemoveAtNotExistingHuman() throws ArrayIndexOutOfBoundsException
-    {
+    void testRemoveAtNotExistingHuman() throws ArrayIndexOutOfBoundsException {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
         System.out.println(repository);
-        Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.removeAt(4));
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> repository.removeAt(4));
         assertNotNull(thrown.getMessage());
     }
 
-    /** тестирование функции получения информации о человеке по индексу */
+    /** testing function - get information about human on index */
     @Test
-    void testGet()
-    {
+    void testGet() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
         System.out.println(repository);
         repository.get(0);
     }
 
-    /** тестирование функции получения информации о человеке по несуществующему индексу */
+    /** testing function - get information about not existing human on index */
     @Test
-    void testGetNotExistingHuman() throws ArrayIndexOutOfBoundsException
-    {
+    void testGetNotExistingHuman() throws ArrayIndexOutOfBoundsException {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
         System.out.println(repository);
         Throwable thrown = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.get(4));
         assertNotNull(thrown.getMessage());
     }
 
-    /** тестирование задания нового человека на существующую позицию */
+    /** testing function - set new human on existing position */
     @Test
     void testSet() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
         System.out.println(repository);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.set(0, newHuman_3);
     }
 
-    /** тестирование задания нового человека на несуществующую позицию */
+    /** testing function - set new human on not existing position */
     @Test
     void testSetNotExistingHuman() throws Exception {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        Human newHuman = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
         repository.add(newHuman);
         System.out.println(repository);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         Throwable thrown = Assertions.assertThrows(Exception.class, () -> repository.set(4, newHuman_3));
         assertNotNull(thrown.getMessage());
     }
 
-    /** тестирование поиска по фамилии в репозитории */
+    /** test finding on surname in repository */
     @Test
     void testFindOnSurname() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("14.05.1997");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         RepositoryForHumans find_rep = repository.findOn("Пупкин");
         System.out.println(find_rep);
     }
 
-    /** тестирование поиска по дате рождения в репозитории */
+    /** test finding on date of birth in repository */
     @Test
     void testFindOnDateOfBirth() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         RepositoryForHumans find_rep = repository.findOn(formatter.parseDateTime("14.05.1996"));
         System.out.println(find_rep);
-  }
+    }
 
-    /** тестирование поиска по возрасту в репозитории */
+    /** test finding on age in repository */
     @Test
     void testFindOnAge() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         RepositoryForHumans find_rep = repository.findOn(22);
         System.out.println(find_rep);
     }
 
-    /** тестирование поиска по несуществующей фамилии в репозитории */
+    /** test finding on not existing surname in repository */
     @Test
     void testFindOnSurnameNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         RepositoryForHumans find_rep = repository.findOn("Пупкина");
         System.out.println(find_rep);
     }
 
-    /** тестирование поиска по несуществующей дате рождения в репозитории */
+    /** test finding on not existing date of birth in repository */
     @Test
     void testFindOnDateOfBirthNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         RepositoryForHumans find_rep = repository.findOn(formatter.parseDateTime("14.05.1997"));
         System.out.println(find_rep);
     }
 
-    /** тестирование поиска по несуществующему возрасту в репозитории */
+    /** test finding on not existing age in repository */
     @Test
     void testFindOnAgeNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         RepositoryForHumans find_rep = repository.findOn(30);
         System.out.println(find_rep);
     }
 
-    /** тестирование сортировки пузырьком по фамилии для репозитория */
+    /** test bubblesort on surname in repository */
     @Test
     void testBubbleSortSurname() {
         repository.setSorter(new BubbleSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** тестирование сортировки вставками по фамилии для репозитория */
+    /** test insertsort on surname in repository */
     @Test
     void testInsertSortSurname() {
         repository.setSorter(new InsertSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** тестирование сортировки Шелла по фамилии для репозитория */
+    /** test shellsort on surname in repository */
     @Test
     void testShellSortSurname() {
         repository.setSorter(new ShellSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** тестирование сортировки пузырьком по дате рождения для репозитория */
+    /** test bubblesort on date of birth in repository */
     @Test
     void testBubbleSortDateOfBirth() {
         repository.setSorter(new BubbleSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** тестирование сортировки вставками по дате рождения для репозитория */
+    /** test insertsort on date of birth in repository */
     @Test
     void testInsertSortDateOfBirth() {
         repository.setSorter(new InsertSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** тестирование сортировки Шелла по дате рождения для репозитория */
+    /** test shellsort on date of birth in repository */
     @Test
     void testShellSortDateOfBirth() {
         repository.setSorter(new ShellSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** тестирование сортировки пузырьком по возрасту для репозитория */
+    /** test bubblesort on age in repository */
     @Test
     void testBubbleSortAge() {
         repository.setSorter(new BubbleSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanAgeComparator());
     }
 
-    /** тестирование сортировки вставками по возрасту для репозитория */
+    /** test insertsort on age in repository */
     @Test
     void testInsertSortAge() {
         repository.setSorter(new InsertSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanAgeComparator());
     }
 
-    /** тестирование сортировки Шелла по возрасту для репозитория */
+    /** test shellsort on age in repository */
     @Test
     void testShellSortAge() {
         repository.setSorter(new ShellSorter());
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
-        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Sex.MALE);
+        Human newHuman_1 = new Human("Семенов", "Семен", "Семенович", dateOfBirth_1, Gender.MALE);
         repository.add(newHuman_1);
         DateTime dateOfBirth_2 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Sex.MALE);
+        Human newHuman_2 = new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE);
         repository.add(newHuman_2);
         DateTime dateOfBirth_4 = formatter.parseDateTime("14.05.1996");
-        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Sex.MALE);
+        Human newHuman_4 = new Human("Пупкин", "Семен", "Семенович", dateOfBirth_4, Gender.MALE);
         repository.add(newHuman_4);
         DateTime dateOfBirth_3 = formatter.parseDateTime("23.05.2000");
-        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Sex.MALE);
+        Human newHuman_3 = new Human("Иванов", "Иван", "Иванович", dateOfBirth_3, Gender.MALE);
         repository.add(newHuman_3);
         System.out.println(repository);
         repository.sortBy(new HumanAgeComparator());

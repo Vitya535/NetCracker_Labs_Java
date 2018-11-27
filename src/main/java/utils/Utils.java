@@ -3,17 +3,17 @@ package utils;
 import human.Human;
 
 /**
- * Класс утилит для различных вспомогательных функций
- * @author Кушнеренко Виктор
+ * Utils class for various support functions
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class Utils {
 
     /**
-     * Функция, склеивающая два массива людей в один
-     * @param humansToConcatOne - первый массив для склеивания
-     * @param humansToConcatTwo - второй массив для склеивания
-     * @return возвращает склеенный массив людей
+     * Function, concat two arrays of people in one
+     * @param humansToConcatOne - first array for concat
+     * @param humansToConcatTwo - second array for concat
+     * @return return concat array of people
      */
     public static Human[] concat(Human[] humansToConcatOne, Human[] humansToConcatTwo) {
         int humansToConcatOneLen = humansToConcatOne.length;

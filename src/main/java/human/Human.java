@@ -8,155 +8,154 @@ import java.util.Objects;
 import static java.lang.String.join;
 
 /**
- * Класс человека с id, ФИО, датой рождения,
- * возрастом
- * @author Кушнеренко Виктор
+ * Class of human with id, full name, date of birth, age
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class Human
 {
     /**
-     * Конструктор для создания человека
-     * @param surname - фамилия
-     * @param name - имя
-     * @param patronymic - отчество
-     * @param dateOfBirth - дата рождения
-     * @param sex - пол
+     * Constructor for creating humans
+     * @param surname - the human surname
+     * @param name - the human name
+     * @param patronymic - the human patronymic
+     * @param dateOfBirth - the human date of birth
+     * @param gender - the gender of human
      */
-    public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Sex sex)
+    public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Gender gender)
     {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
-        this.sex = sex;
+        this.gender = gender;
     }
 
-    /** поле id-шник */
+    /** the field ID */
     private int id;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#id}
-     * @return возвращает ID человека
+     * Function, returning the value of field {@link Human#id}
+     * @return returns human ID
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Функция для определения значения поля {@link Human#id}
-     * @param id - новый ID человека
+     * Function for define the value of field {@link Human#id}
+     * @param id - new human ID
      */
     public void setId(int id) {
         this.id = id;
     }
 
-    /** поле для имени человека */
+    /** field for name of human */
     private String name;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#name}
-     * @return возвращает имя человека
+     * Function, returning the value of field {@link Human#name}
+     * @return returns human name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Функция для определения значения поля {@link Human#name}
-     * @param name - новое имя человека
+     * Function for define the value of field {@link Human#name}
+     * @param name - new human name
      */
     public void setName(String name) {
         this.name = name;
     }
 
-    /** поле для фамилии человека */
+    /** field for human surname */
     private String surname;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#surname}
-     * @return возвращает фамилию человека
+     * Function, returning the value of field {@link Human#surname}
+     * @return returns human surname
      */
     public String getSurname() {
         return surname;
     }
 
     /**
-     * Функция для определения значения поля {@link Human#surname}
-     * @param surname - новая фамилия человека
+     * Function for define the value of field {@link Human#surname}
+     * @param surname - new surname of human
      */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    /** поле для отчества человека */
+    /** field for human patronymic */
     private String patronymic;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#patronymic}
-     * @return возвращает отчество человека
+     * Function, returning the value of field {@link Human#patronymic}
+     * @return returns human patronymic
      */
     public String getPatronymic() {
         return patronymic;
     }
 
     /**
-     * Функция для определения значения поля {@link Human#patronymic}
-     * @param patronymic - новое отчество человека
+     * Function for define the value of field {@link Human#patronymic}
+     * @param patronymic - new human patronymic
      */
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
 
     /**
-     * Функция, возвращающая значения полей {@link Human#surname}, {@link Human#name}, {@link Human#patronymic}
-     * @return возвращает ФИО человека в именительном падеже
+     * Function, returning the value of fields {@link Human#surname}, {@link Human#name}, {@link Human#patronymic}
+     * @return returns full name of human in nominative case
      */
     public String getFIO()
     {
         return join(" ", surname, name, patronymic);
     }
 
-    /** поле для даты рождения */
+    /** field for date of birth */
     private DateTime dateOfBirth;
 
     /**
-     * Функция, возвращающая значение поля {@link Human#dateOfBirth}
-     * @return возвращает дату рождения человека
+     * Function, returning the value of field {@link Human#dateOfBirth}
+     * @return return human date of birth
      */
     public DateTime getDateOfBirth() { return dateOfBirth; } // подчеркивания !!!
 
     /**
-     * Функция для определения значения поля {@link Human#dateOfBirth}
-     * @param dateOfBirth - новая дата рождения человека
+     * Function for define the value of field {@link Human#dateOfBirth}
+     * @param dateOfBirth - new date of birth for human
      */
     public void setDateOfBirth(DateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    /** поле для определения пола человека */
-    private Sex sex;
+    /** field for defining gender of human */
+    private Gender gender;
 
     /**
-     * Функция для получения пола человека
-     * @return возвращает пол человека
+     * Function for getting gender of human
+     * @return return gender of human
      */
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
     /**
-     * Функция для задания пола человека
-     * @param sex - пол, который задается человеку
+     * Function for setting gender of human
+     * @param gender - gender, which sets to human
      */
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     /**
-     * Функция, возвращающая значение разности поля {@link Human#dateOfBirth}
-     * и нынешнего времени
-     * @return возвращает возраст человека
+     * Function, returning the difference of human date of birth {@link Human#dateOfBirth}
+     * and current time
+     * @return return age of human
      */
     public int getAge()
     {
@@ -166,8 +165,8 @@ public class Human
     }
 
     /**
-     * Функция, представляющая строковое представление обьекта человека
-     * @return возвращает представление обьекта в виде строки
+     * Function, which representing string view of human object
+     * @return return object view in string format
      */
     @Override
     public String toString() {
@@ -177,14 +176,14 @@ public class Human
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", dateOfBirth=" + dateOfBirth + '\'' +
-                ", sex=" + sex +
+                ", gender=" + gender +
                 '}';
     }
 
     /**
-     * Переопределенный метод equals для класса человека
-     * @param o - обьект класса Object (для нас пока класс человека {@link Human}
-     * @return возвращает значение, определяющее равны обьекты или нет
+     * Override method equals for human class
+     * @param o - object of class Object (for us it's human class {@link Human}
+     * @return return value, which define is objects equal or not
      */
     @Override
     public boolean equals(Object o) {
@@ -195,15 +194,15 @@ public class Human
                 Objects.equals(getSurname(), human.getSurname()) &&
                 Objects.equals(getPatronymic(), human.getPatronymic()) &&
                 Objects.equals(getDateOfBirth(), human.getDateOfBirth()) &&
-                getSex() == human.getSex();
+                getGender() == human.getGender();
     }
 
     /**
-     * Переопределенный метод hashCode для класса человека
-     * @return возвращает хэш-код обьекта человека
+     * Override method hashCode for human class
+     * @return return hashCode of human object
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getSex());
+        return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getGender());
     }
 }

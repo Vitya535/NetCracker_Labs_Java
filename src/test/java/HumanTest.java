@@ -1,5 +1,5 @@
 import human.Human;
-import human.Sex;
+import human.Gender;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -10,32 +10,32 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Unit-тесты через JUnit 5.2 для класса человека {@link Human}
- * @author Кушнеренко Виктор
+ * Unit-tests wrote on JUnit 5.2 for human class {@link Human}
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 class HumanTest
 {
-    /** приватное поле обьекта человека специально для тестов */
+    /** private field of human object special for tests */
     private static Human human;
 
-    /** инициализация данных для тестов */
+    /** initialize data for tests */
     @BeforeAll
     static void initTest()
     {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
-        human = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Sex.MALE);
+        human = new Human("Семенов", "Семен", "Семенович", dateOfBirth, Gender.MALE);
     }
 
-    /** очищение обьекта человека после тестирования */
+    /** clear human object after all tests */
     @AfterAll
     static void afterTest()
     {
         human = null;
     }
 
-    /** тестирование функции получения возраста человека */
+    /** test for function, which getting age of human */
     @Test
     void testGetAge()
     {
@@ -44,7 +44,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения ID человека */
+    /** test for function, which getting id of human */
     @Test
     void testGetId()
     {
@@ -53,7 +53,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения фамилии человека */
+    /** test for function, which getting surname of human */
     @Test
     void testGetSurname()
     {
@@ -62,7 +62,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения имени человека */
+    /** test for function, which getting name of human */
     @Test
     void testGetName()
     {
@@ -71,7 +71,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения отчества человека */
+    /** test for function, which getting patronymic of human */
     @Test
     void testGetPatronymic()
     {
@@ -80,7 +80,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения даты рождения человека */
+    /** test for function, which getting date of birth of human */
     @Test
     void testGetDateOfBirth()
     {
@@ -90,7 +90,7 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения ФИО человека */
+    /** test for function, which getting full name of human */
     @Test
     void testGetFIO()
     {
@@ -99,12 +99,12 @@ class HumanTest
         assertEquals(expected, actual);
     }
 
-    /** тестирование функции получения пола человека */
+    /** test for function, which getting gender of human */
     @Test
     void testGetSex()
     {
-        Sex actual = human.getSex();
-        Sex expected = Sex.MALE;
+        Gender actual = human.getGender();
+        Gender expected = Gender.MALE;
         assertEquals(expected, actual);
     }
 }

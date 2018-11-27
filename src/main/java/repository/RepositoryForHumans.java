@@ -15,27 +15,27 @@ import java.util.Comparator;
 import java.util.stream.IntStream;
 
 /**
- * Класс репозитория для людей {@link Human}
- * @author Кушнеренко Виктор
+ * Class repository for humans {@link Human}
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class RepositoryForHumans
 {
-    /** поле с массивом из людей {@link Human}*/
+    /** field with array of humans {@link Human}*/
     private Human[] arrayOfHumans;
 
-    /** статическое поле для задания новому человеку уникального ID */
+    /** static field for set new human unique ID */
     private int id = 1;
 
-    /** поле для количества людей в репозитории */
-    private int count;
+    /** Field for count people in repository */
+    private int repCount;
 
-    /** поле для обьекта класса сортировщика {@link Sorter}*/
+    /** field for object of class Sorter {@link Sorter}*/
     private Sorter sorter;
 
     /**
-     * Конструктор для репозитория людей
-     * Создает пустой массив с сортировщиком Шелла по умолучанию
+     * Constructor for repository of humans
+     * Creating empty array with ShellSorter on default {@link ShellSorter}
      * @see RepositoryForHumans#RepositoryForHumans(Human[])
      * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
      * @see RepositoryForHumans#RepositoryForHumans(Sorter)
@@ -43,14 +43,14 @@ public class RepositoryForHumans
     public RepositoryForHumans()
     {
         arrayOfHumans = new Human[0];
-        count = 0;
+        repCount = 0;
         sorter = new ShellSorter();
     }
 
     /**
-     * Конструктор для репозитория людей
-     * Создает пустой массив с сортировщиком new_sorter
-     * @param new_sorter - сортировщик, задающийся репозиторию
+     * Constructor for repository of humans
+     * Creating empty array with Sorter new_sorter {@link Sorter}
+     * @param new_sorter - sorter, setting to repository
      * @see RepositoryForHumans#RepositoryForHumans(Human[])
      * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
      * @see RepositoryForHumans#RepositoryForHumans()
@@ -58,15 +58,15 @@ public class RepositoryForHumans
     public RepositoryForHumans(Sorter new_sorter)
     {
         arrayOfHumans = new Human[0];
-        count = 0;
+        repCount = 0;
         sorter = new_sorter;
     }
 
     /**
-     * Конструктор для репозитория из людей
-     * на основе некоторого массива
-     * с сортировщиком Шелла по умолчанию
-     * @param array - некоторый массив из людей
+     * Constructor for repository of humans
+     * based on some array
+     * with ShellSorter on default
+     * @param array - some array with people
      * @see RepositoryForHumans#RepositoryForHumans()
      * @see RepositoryForHumans#RepositoryForHumans(Human[], Sorter)
      * @see RepositoryForHumans#RepositoryForHumans(Sorter)
@@ -74,16 +74,16 @@ public class RepositoryForHumans
     public RepositoryForHumans(Human[] array)
     {
         arrayOfHumans = array;
-        count = array.length;
+        repCount = array.length;
         sorter = new ShellSorter();
     }
 
     /**
-     * Конструктор для репозитория из людей
-     * на основе некоторого массива
-     * с сортировщиком new_sorter
-     * @param array - некоторый массив из людей
-     * @param new_sorter - сортировщик, задающийся репозиторию
+     * Constructor for repository of humans
+     * based on some array
+     * with Sorter new_sorter {@link Sorter}
+     * @param array - some array with people
+     * @param new_sorter - sorter, setting to repository
      * @see RepositoryForHumans#RepositoryForHumans()
      * @see RepositoryForHumans#RepositoryForHumans(Sorter)
      * @see RepositoryForHumans#RepositoryForHumans(Human[])
@@ -91,39 +91,39 @@ public class RepositoryForHumans
     public RepositoryForHumans(Human[] array, Sorter new_sorter)
     {
         arrayOfHumans = array;
-        count = array.length;
+        repCount = array.length;
         sorter = new_sorter;
     }
 
     /**
-     * Функция, возвращающая количество элементов в репозитории
-     * @return возвращает количество элементов
+     * Function, returning count of elements in repository
+     * @return return count of elements
      */
-    public int Count()
+    public int count()
     {
-        return count;
+        return repCount;
     }
 
     /**
-     * Функция, возвращающая обьект сортировщика репозитория {@link Sorter}
-     * @return возвращает сортировщик репозитория
+     * Function, returning object of Sorter repository {@link Sorter}
+     * @return return Sorter of repository
      */
     public Sorter getSorter() {
         return sorter;
     }
 
     /**
-     * Функция, задающая обьект сортировщика репозитория {@link Sorter}
-     * @param sorter - новый сортировщик репозитория
+     * Function, setting object of Sorter repository {@link Sorter}
+     * @param sorter - new Sorter of repository
      */
     public void setSorter(Sorter sorter) {
         this.sorter = sorter;
     }
 
     /**
-     * Функция, проверяющая наличие человека в репозитории
-     * @param newHuman - человек, которого необходимо проверить
-     * @return возвращает результат проверки
+     * Function, checking is human in repository
+     * @param newHuman - human, who need to check
+     * @return return result of check
      */
     private boolean isHumanInRepository(Human newHuman)
     {
@@ -132,20 +132,20 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция добавления в конец репозитория уже существующего человека
-     * сделано для использования в поиске {@link RepositoryForHumans#find(Checker, Object)}
-     * @param existingHuman - человек, который должен быть добавлен в репозиторий
+     * Function, adding in the end of repository existing human
+     * made for use in the finding people {@link RepositoryForHumans#find(Checker, Object)}
+     * @param existingHuman - human, who need to add in repository
      */
     private void addExistingHuman(Human existingHuman) {
         Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
         newArrayOfHumans[arrayOfHumans.length] = existingHuman;
         arrayOfHumans = newArrayOfHumans;
-        count++;
+        repCount++;
     }
 
     /**
-     * Функция добавления в конец репозитория нового человека
-     * @param newHuman - человек, который должен быть добавлен в репозиторий
+     * Function, adding in the end of repository new human
+     * @param newHuman - human, who need to add in repository
      */
     public void add(Human newHuman)
     {
@@ -155,14 +155,14 @@ public class RepositoryForHumans
             Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
             newArrayOfHumans[arrayOfHumans.length] = newHuman;
             arrayOfHumans = newArrayOfHumans;
-            count++;
+            repCount++;
             id++;
         }
     }
 
     /**
-     * Функция добавления в конец репозитория нескольких новых людей
-     * @param newHumans - люди, которые должны быть добавлены в репозиторий
+     * Function, adding in the end of repository several new humans
+     * @param newHumans - humans, who need to add in repository
      */
     public void addRange(Human[] newHumans)
     {
@@ -171,8 +171,8 @@ public class RepositoryForHumans
     }
 
     /**
-     * Удаление первое вхождение обьекта человека из репозитория
-     * @param humanForDelete - обьект человека, который нужно удалить
+     * Remove first entry object of human from repository
+     * @param humanForDelete - object of human, who need to delete
      */
     public void remove(Human humanForDelete)
     {
@@ -183,20 +183,20 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция удаления человека из репозитория по указанному индексу
-     * @param index - индекс, по которому необходимо удалить человека
+     * Function of delete human from repository on pointed index
+     * @param index - index, by which we need to delete human
      */
     public void removeAt(int index)
     {
         arrayOfHumans = Utils.concat(Arrays.copyOfRange(arrayOfHumans, 0, index),
                         Arrays.copyOfRange(arrayOfHumans, index + 1, arrayOfHumans.length));
-        count--;
+        repCount--;
     }
 
     /**
-     * Функция для получения человека из репозитория по указанному индексу
-     * @param index - индекс, по которому необходимо получить человека
-     * @return возвращает обьект человека из репозитория
+     * Function for getting human from repository on pointed index
+     * @param index - index, by which we need to get human
+     * @return return object of human from repository
      */
     public Human get(int index)
     {
@@ -204,9 +204,9 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция для задания нового человека в репозиторий по указанному индексу
-     * @param index - индекс, по которому необходимо задать человека
-     * @param human - новый человек который задается по индексу (index)
+     *  Function for setting human from repository on pointed index
+     * @param index - index, by which we need to set human
+     * @param human - new human, which set on index
      */
     public void set(int index, Human human) {
         //int newId = arrayOfHumans[index].getId();
@@ -217,11 +217,11 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция нахождения человека по конкретному
-     * значению некоторого параметра
-     * @param checker - обьект чекера, который ищет человека по значению конкретного параметра {@link Checker}
-     * @param value - значение параметра, по которому мы сопоставляем каждого человека в репозитории
-     * @return возвращает новый репозиторий из найденных людей
+     * Function for finding people on concrete
+     * value of some parameter
+     * @param checker - object of Checker, which find human on value of some parameter {@link Checker}
+     * @param value - value of parameter, by which we comprehend each human in repository
+     * @return return new repository of finded people
      */
     private RepositoryForHumans find(Checker checker, Object value)
     {
@@ -235,45 +235,45 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция-обертка для поиска людей по фамилии
+     * Function-wrapper for find people on surname
      * @see RepositoryForHumans#find(Checker, Object)
      * @see RepositoryForHumans#findOn(DateTime)
      * @see RepositoryForHumans#findOn(int)
-     * @param surname - значение фамилии, по которой мы ищем человека
-     * @return возвращает новый репозиторий из найденных людей
+     * @param surname - value of surname, by which we find humans
+     * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(String surname) {
         return find(new HumanSurnameChecker(), surname);
     }
 
     /**
-     * Функция-обертка для поиска людей по дате рождения
+     * Function-wrapper for find people on date of birth
      * @see RepositoryForHumans#find(Checker, Object)
      * @see RepositoryForHumans#findOn(String)
      * @see RepositoryForHumans#findOn(int)
-     * @param datetime - значение даты рождения, по которой мы ищем человека
-     * @return возвращает новый репозиторий из найденных людей
+     * @param datetime - value of date of birth, by which we find humans
+     * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(DateTime datetime){
         return find(new HumanDateOfBirthChecker(), datetime);
     }
 
     /**
-     * Функция-обертка для поиска людей по их возрасту
+     * Function-wrapper for find people on age
      * @see RepositoryForHumans#find(Checker, Object)
      * @see RepositoryForHumans#findOn(String)
      * @see RepositoryForHumans#findOn(DateTime)
-     * @param age - значение возраста, по которому мы ищем человека
-     * @return возвращает новый репозиторий из найденных людей
+     * @param age - value of age, by which we find humans
+     * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(int age) {
         return find(new HumanAgeChecker(), age);
     }
 
     /**
-     * Фукнция-обертка для сортировки людей по определенному значению
-     * некоторого параметра
-     * @param comparator - компаратор, по которому будут сортироваться люди {@link Comparator}
+     * Function-wrapper for sorting people on concrete value
+     * of some parameter
+     * @param comparator - comparator, by which we sorting people {@link Comparator}
      * @see Sorter#sort(RepositoryForHumans, Comparator)
      */
     public void sortBy(Comparator<Human> comparator) {
@@ -281,8 +281,8 @@ public class RepositoryForHumans
     }
 
     /**
-     * Строковое представление репозитория людей
-     * @return возвращает представление класса в виде строки
+     * String representation of human repository
+     * @return return string representation
      */
     @Override
     public String toString() {
@@ -292,9 +292,9 @@ public class RepositoryForHumans
     }
 
     /**
-     * Функция сравнения двух репозиториев
-     * @param o - обьект класса репозитория
-     * @return возвращает результат сравнения в виде true или false
+     * Function for comprehend two repositories
+     * @param o - object of Repository class
+     * @return return result of comprehend - true or false
      */
     @Override
     public boolean equals(Object o) {
@@ -305,8 +305,8 @@ public class RepositoryForHumans
     }
 
     /**
-     * Переопределенный метод hashCode для класса репозитория человека
-     * @return возвращает хэш-код обьекта репозитория человека
+     * Override method hashCode for class of human repository
+     * @return return hashCode of object of human repository
      */
     @Override
     public int hashCode() {

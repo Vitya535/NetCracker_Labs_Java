@@ -5,23 +5,23 @@ import human.Human;
 import java.util.Comparator;
 
 /**
- * Класс компаратора для сравнения людей в репозитории
- * по дате рождения
+ * Class of comparator for comprehend people in repository
+ * on date of birth
  * @see HumanAgeComparator
  * @see HumanSurnameComparator
- * @author Кушнеренко Виктор
+ * @author Kushnerenko Victor
  * @version 1.2
  */
 public class HumanDateOfBirthComparator implements Comparator<Human> {
 
     /**
-     * Функция сравнения двух людей
-     * в репозитории по дате рождения
-     * @param o1 - первый человек, которого мы сравниваем
-     * @param o2 - второй человек, которого мы сравниваем
-     * @return возвращает 1, если дата рождения первого больше, чем второго
-     * возвращает -1, если дата рождения первого меньше, чем второго
-     * возвращает 0, если даты рождения одинаковы
+     * Function for comprehend two humans
+     * in repository on date of birth
+     * @param o1 - first human, who we comprehend
+     * @param o2 - second human, who we comprehend
+     * @return return 1, if date of birth of first human more, than second one
+     * return -1, if date of birth of first human less, than second one
+     * return 0, if date of birth is equal
      * @see HumanAgeComparator#compare(Human, Human)
      * @see HumanSurnameComparator#compare(Human, Human)
      */
