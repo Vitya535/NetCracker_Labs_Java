@@ -1,5 +1,6 @@
 package human;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
@@ -24,12 +25,16 @@ public class Human
      */
     public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Gender gender)
     {
+        logger.debug("init human object with params: " + join(",", surname, name, patronymic, dateOfBirth.toString(), gender.toString()));
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
+
+    /** private object of class Logger for logging class Human */
+    private static final Logger logger = Logger.getLogger(Human.class);
 
     /** the field ID */
     private int id;
@@ -39,6 +44,7 @@ public class Human
      * @return returns human ID
      */
     public int getId() {
+        logger.debug("return id of human");
         return id;
     }
 
@@ -47,6 +53,7 @@ public class Human
      * @param id - new human ID
      */
     public void setId(int id) {
+        logger.debug("set id of human: " + id);
         this.id = id;
     }
 
@@ -58,6 +65,7 @@ public class Human
      * @return returns human name
      */
     public String getName() {
+        logger.debug("get name of human");
         return name;
     }
 
@@ -66,6 +74,7 @@ public class Human
      * @param name - new human name
      */
     public void setName(String name) {
+        logger.debug("set name of human: " + name);
         this.name = name;
     }
 
@@ -77,6 +86,7 @@ public class Human
      * @return returns human surname
      */
     public String getSurname() {
+        logger.debug("get surname of human");
         return surname;
     }
 
@@ -85,6 +95,7 @@ public class Human
      * @param surname - new surname of human
      */
     public void setSurname(String surname) {
+        logger.debug("set surname of human: " + surname);
         this.surname = surname;
     }
 
@@ -96,6 +107,7 @@ public class Human
      * @return returns human patronymic
      */
     public String getPatronymic() {
+        logger.debug("get patronymic of human");
         return patronymic;
     }
 
@@ -104,6 +116,7 @@ public class Human
      * @param patronymic - new human patronymic
      */
     public void setPatronymic(String patronymic) {
+        logger.debug("set patronymic of human: " + patronymic);
         this.patronymic = patronymic;
     }
 
@@ -113,6 +126,7 @@ public class Human
      */
     public String getFIO()
     {
+        logger.debug("get full name of human");
         return join(" ", surname, name, patronymic);
     }
 
@@ -123,13 +137,17 @@ public class Human
      * Function, returning the value of field {@link Human#dateOfBirth}
      * @return return human date of birth
      */
-    public DateTime getDateOfBirth() { return dateOfBirth; } // подчеркивания !!!
+    public DateTime getDateOfBirth() {
+        logger.debug("get date of birth of human");
+        return dateOfBirth;
+    }
 
     /**
      * Function for define the value of field {@link Human#dateOfBirth}
      * @param dateOfBirth - new date of birth for human
      */
     public void setDateOfBirth(DateTime dateOfBirth) {
+        logger.debug("set date of birth of human: " + dateOfBirth);
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -141,6 +159,7 @@ public class Human
      * @return return gender of human
      */
     public Gender getGender() {
+        logger.debug("get gender of human");
         return gender;
     }
 
@@ -149,6 +168,7 @@ public class Human
      * @param gender - gender, which sets to human
      */
     public void setGender(Gender gender) {
+        logger.debug("set gender of human: " + gender);
         this.gender = gender;
     }
 
@@ -159,6 +179,7 @@ public class Human
      */
     public int getAge()
     {
+        logger.debug("get age of human");
         DateTime now = DateTime.now();
         Period difference = new Period(this.dateOfBirth, now);
         return difference.getYears();
@@ -170,6 +191,7 @@ public class Human
      */
     @Override
     public String toString() {
+        logger.debug("convert human to string representation");
         return "human.Human{" +
                 "id=" + id +
                 ", surname='" + surname + '\'' +
@@ -187,6 +209,7 @@ public class Human
      */
     @Override
     public boolean equals(Object o) {
+        logger.debug("method equals invoked with params: " + o);
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
@@ -203,6 +226,7 @@ public class Human
      */
     @Override
     public int hashCode() {
+        logger.debug("method hashCode invoked");
         return Objects.hash(getName(), getSurname(), getPatronymic(), getDateOfBirth(), getGender());
     }
 }

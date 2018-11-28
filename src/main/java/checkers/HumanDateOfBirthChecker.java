@@ -1,6 +1,7 @@
 package checkers;
 
 import human.Human;
+import org.apache.log4j.Logger;
 
 /**
  * Class for finding people in repository
@@ -13,6 +14,9 @@ import human.Human;
  */
 public class HumanDateOfBirthChecker implements Checker
 {
+    /** private object of class Logger for logging class HumanDateOfBirthChecker */
+    private static final Logger logger = Logger.getLogger(Checker.class);
+
     /**
      * Override method check for finding people in repository
      * on date of birth
@@ -25,6 +29,7 @@ public class HumanDateOfBirthChecker implements Checker
      */
     @Override
     public boolean check(Human findHuman, Object value) {
+        logger.debug("method check date of birth invoked with params: " + findHuman + "and " + value);
         return findHuman.getDateOfBirth().equals(value);
     }
 }

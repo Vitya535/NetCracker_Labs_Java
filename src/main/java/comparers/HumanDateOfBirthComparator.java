@@ -1,6 +1,7 @@
 package comparers;
 
 import human.Human;
+import org.apache.log4j.Logger;
 
 import java.util.Comparator;
 
@@ -13,6 +14,9 @@ import java.util.Comparator;
  * @version 1.2
  */
 public class HumanDateOfBirthComparator implements Comparator<Human> {
+
+    /** private object of class Logger for logging class HumanDateOfBirthComparator */
+    private static final Logger logger = Logger.getLogger(Comparator.class);
 
     /**
      * Function for comprehend two humans
@@ -27,6 +31,7 @@ public class HumanDateOfBirthComparator implements Comparator<Human> {
      */
     @Override
     public int compare(Human o1, Human o2) {
+        logger.debug("method compare on date of birth invoked with params: " + o1 + "and " + o2);
         return o1.getDateOfBirth().compareTo(o2.getDateOfBirth());
     }
 }

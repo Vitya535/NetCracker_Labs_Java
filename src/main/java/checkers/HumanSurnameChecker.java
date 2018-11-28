@@ -2,6 +2,9 @@ package checkers;
 
 
 import human.Human;
+import org.apache.log4j.Logger;
+
+import java.util.Comparator;
 
 /**
  * Class for finding people in repository
@@ -14,6 +17,9 @@ import human.Human;
  */
 public class HumanSurnameChecker implements Checker
 {
+    /** private object of class Logger for logging class HumanSurnameChecker */
+    private static final Logger logger = Logger.getLogger(Checker.class);
+
     /**
      * Override method check for finding people in repository
      * on surname
@@ -26,6 +32,7 @@ public class HumanSurnameChecker implements Checker
      */
     @Override
     public boolean check(Human findHuman, Object value) {
+        logger.debug("method check surname invoked with params: " + findHuman + "and " + value);
         return findHuman.getSurname().equals(value);
     }
 }

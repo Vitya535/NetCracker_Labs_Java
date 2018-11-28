@@ -1,6 +1,7 @@
 package sorters;
 
 import human.Human;
+import org.apache.log4j.Logger;
 import repository.RepositoryForHumans;
 
 import java.util.Comparator;
@@ -15,6 +16,9 @@ import java.util.Comparator;
  */
 public class InsertSorter implements Sorter{
 
+    /** private object of class Logger for logging class InsertSorter*/
+    private static final Logger logger = Logger.getLogger(Sorter.class);
+
     /**
      * InsertSort Function for sort repository of people
      * @param repository - repository, which we want to sort {@link RepositoryForHumans}
@@ -25,6 +29,7 @@ public class InsertSorter implements Sorter{
      */
     @Override
     public void sort(RepositoryForHumans repository, Comparator<Human> comparator) {
+        logger.debug("method sort invoke with params: " + repository.toString() + "and " + comparator);
         for (int i = 1; i < repository.count(); i++) {
             int j;
             Human buf = repository.get(i);

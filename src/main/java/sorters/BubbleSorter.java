@@ -1,5 +1,6 @@
 package sorters;
 import human.Human;
+import org.apache.log4j.Logger;
 import repository.RepositoryForHumans;
 
 import java.util.Comparator;
@@ -14,6 +15,9 @@ import java.util.Comparator;
  */
 public class BubbleSorter implements Sorter {
 
+    /** private object of class Logger for logging class BubbleSorter*/
+    private static final Logger logger = Logger.getLogger(Sorter.class);
+
     /**
      * Function for bubblesort people in repository
      * @param repository - repository, which we want to sort {@link RepositoryForHumans}
@@ -24,6 +28,7 @@ public class BubbleSorter implements Sorter {
      */
     @Override
     public void sort(RepositoryForHumans repository, Comparator<Human> comparator) {
+        logger.debug("method sort invoke with params: " + repository.toString() + "and " + comparator);
         for (int i = repository.count() - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (comparator.compare(repository.get(j), repository.get(j + 1)) > 0) {

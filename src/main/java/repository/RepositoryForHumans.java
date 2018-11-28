@@ -5,6 +5,7 @@ import checkers.HumanAgeChecker;
 import checkers.HumanDateOfBirthChecker;
 import checkers.HumanSurnameChecker;
 import human.Human;
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import sorters.ShellSorter;
 import sorters.Sorter;
@@ -21,6 +22,9 @@ import java.util.stream.IntStream;
  */
 public class RepositoryForHumans
 {
+    /** private object of class Logger for logging class RepositoryForHumans */
+    private static final Logger logger = Logger.getLogger(RepositoryForHumans.class);
+
     /** field with array of humans {@link Human}*/
     private Human[] arrayOfHumans;
 
@@ -42,6 +46,7 @@ public class RepositoryForHumans
      */
     public RepositoryForHumans()
     {
+        logger.debug("init repository for humans without params");
         arrayOfHumans = new Human[0];
         repCount = 0;
         sorter = new ShellSorter();
@@ -57,6 +62,7 @@ public class RepositoryForHumans
      */
     public RepositoryForHumans(Sorter new_sorter)
     {
+        logger.debug("init repository for humans with params: " + new_sorter);
         arrayOfHumans = new Human[0];
         repCount = 0;
         sorter = new_sorter;
@@ -73,6 +79,7 @@ public class RepositoryForHumans
      */
     public RepositoryForHumans(Human[] array)
     {
+        logger.debug("init repository for humans with params: " + Arrays.toString(array));
         arrayOfHumans = array;
         repCount = array.length;
         sorter = new ShellSorter();
@@ -90,6 +97,7 @@ public class RepositoryForHumans
      */
     public RepositoryForHumans(Human[] array, Sorter new_sorter)
     {
+        logger.debug("init repository for humans with params: " + Arrays.toString(array) + "and " + new_sorter);
         arrayOfHumans = array;
         repCount = array.length;
         sorter = new_sorter;
@@ -101,6 +109,7 @@ public class RepositoryForHumans
      */
     public int count()
     {
+        logger.debug("get count of repository");
         return repCount;
     }
 
@@ -109,6 +118,7 @@ public class RepositoryForHumans
      * @return return Sorter of repository
      */
     public Sorter getSorter() {
+        logger.debug("get sorter of repository");
         return sorter;
     }
 
@@ -117,6 +127,7 @@ public class RepositoryForHumans
      * @param sorter - new Sorter of repository
      */
     public void setSorter(Sorter sorter) {
+        logger.debug("set sorter of repository");
         this.sorter = sorter;
     }
 
@@ -127,6 +138,7 @@ public class RepositoryForHumans
      */
     private boolean isHumanInRepository(Human newHuman)
     {
+        logger.debug("checking human on unique: " + newHuman.toString());
         return Arrays.stream(arrayOfHumans)
                 .anyMatch(human -> human.equals(newHuman) && human.hashCode() == newHuman.hashCode());
     }
@@ -137,6 +149,7 @@ public class RepositoryForHumans
      * @param existingHuman - human, who need to add in repository
      */
     private void addExistingHuman(Human existingHuman) {
+        logger.debug("add existing human: " + existingHuman.toString());
         Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
         newArrayOfHumans[arrayOfHumans.length] = existingHuman;
         arrayOfHumans = newArrayOfHumans;
@@ -149,8 +162,11 @@ public class RepositoryForHumans
      */
     public void add(Human newHuman)
     {
+        logger.debug("method add invoked with params: " + newHuman.toString());
+        logger.info("checking human on unique: " + newHuman.toString());
         if (!isHumanInRepository(newHuman))
         {
+            logger.info("add human");
             newHuman.setId(id);
             Human[] newArrayOfHumans = Arrays.copyOf(arrayOfHumans, arrayOfHumans.length + 1);
             newArrayOfHumans[arrayOfHumans.length] = newHuman;
@@ -166,6 +182,7 @@ public class RepositoryForHumans
      */
     public void addRange(Human[] newHumans)
     {
+        logger.debug("method addRange invoked with params: " + Arrays.toString(newHumans));
         for (Human newHuman : newHumans)
             this.add(newHuman);
     }
@@ -176,10 +193,17 @@ public class RepositoryForHumans
      */
     public void remove(Human humanForDelete)
     {
+        logger.debug("method remove invoked with params: " + humanForDelete.toString());
         int index = IntStream.range(0, arrayOfHumans.length)
                 .filter(i -> arrayOfHumans[i].equals(humanForDelete))
                 .findFirst().orElse(-1);
-        removeAt(index);
+        logger.info("get index of human, who we want to remove: " + index);
+        try {
+            logger.info("remove human");
+            removeAt(index);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -188,6 +212,7 @@ public class RepositoryForHumans
      */
     public void removeAt(int index)
     {
+        logger.debug("method removeAt invoked with params: " + index);
         arrayOfHumans = Utils.concat(Arrays.copyOfRange(arrayOfHumans, 0, index),
                         Arrays.copyOfRange(arrayOfHumans, index + 1, arrayOfHumans.length));
         repCount--;
@@ -200,7 +225,13 @@ public class RepositoryForHumans
      */
     public Human get(int index)
     {
-        return arrayOfHumans[index];
+        logger.debug("method get invoked with params: " + index);
+        try {
+            return arrayOfHumans[index];
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return null;
     }
 
     /**
@@ -209,11 +240,14 @@ public class RepositoryForHumans
      * @param human - new human, which set on index
      */
     public void set(int index, Human human) {
-        //int newId = arrayOfHumans[index].getId();
-        if (human.getId() == 0)
-            human.setId(arrayOfHumans[index].getId());
-        arrayOfHumans[index] = human;
-        //arrayOfHumans[index].setId(newId);
+        logger.debug("method set invoked with params: " + index + "and " + human.toString());
+        try {
+            if (human.getId() == 0)
+                human.setId(arrayOfHumans[index].getId());
+            arrayOfHumans[index] = human;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -225,9 +259,11 @@ public class RepositoryForHumans
      */
     private RepositoryForHumans find(Checker checker, Object value)
     {
+        logger.debug("method find invoked with params: " + checker + "and " + value);
         RepositoryForHumans findHumans = new RepositoryForHumans();
         for (Human human : arrayOfHumans) {
-            if (checker.check(human, value)){
+            logger.info("checking human: " + human.toString());
+            if (checker.check(human, value)) {
                findHumans.addExistingHuman(human);
             }
         }
@@ -243,6 +279,7 @@ public class RepositoryForHumans
      * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(String surname) {
+        logger.debug("method findOn surname invoked with params: " + surname);
         return find(new HumanSurnameChecker(), surname);
     }
 
@@ -255,6 +292,7 @@ public class RepositoryForHumans
      * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(DateTime datetime){
+        logger.debug("method findOn date of birth invoked with params: " + datetime);
         return find(new HumanDateOfBirthChecker(), datetime);
     }
 
@@ -267,6 +305,7 @@ public class RepositoryForHumans
      * @return return new repository of finded people
      */
     public RepositoryForHumans findOn(int age) {
+        logger.debug("method findOn age invoked with params: " + age);
         return find(new HumanAgeChecker(), age);
     }
 
@@ -277,6 +316,7 @@ public class RepositoryForHumans
      * @see Sorter#sort(RepositoryForHumans, Comparator)
      */
     public void sortBy(Comparator<Human> comparator) {
+        logger.debug("method sortBy invoked with params: " + comparator);
         sorter.sort(this, comparator);
     }
 
@@ -286,6 +326,7 @@ public class RepositoryForHumans
      */
     @Override
     public String toString() {
+        logger.debug("method toString invoked");
         return "repository.RepositoryForHumans{" +
                 "arrayOfHumans=" + Arrays.toString(arrayOfHumans) +
                 '}';
@@ -298,6 +339,7 @@ public class RepositoryForHumans
      */
     @Override
     public boolean equals(Object o) {
+        logger.debug("method equals invoked with params: " + o);
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RepositoryForHumans that = (RepositoryForHumans) o;
@@ -310,6 +352,7 @@ public class RepositoryForHumans
      */
     @Override
     public int hashCode() {
+        logger.debug("method hashCode invoked");
         return Arrays.hashCode(arrayOfHumans);
     }
 }
