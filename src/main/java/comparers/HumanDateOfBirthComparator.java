@@ -8,19 +8,22 @@ import java.util.Comparator;
 /**
  * Class of comparator for comprehend people in repository
  * on date of birth
+ *
+ * @author Kushnerenko Victor
  * @see HumanAgeComparator
  * @see HumanSurnameComparator
- * @author Kushnerenko Victor
- * @version 1.2
  */
 public class HumanDateOfBirthComparator implements Comparator<Human> {
 
-    /** private object of class Logger for logging class HumanDateOfBirthComparator */
+    /**
+     * private object of class Logger for logging class HumanDateOfBirthComparator
+     */
     private static final Logger logger = Logger.getLogger(Comparator.class);
 
     /**
      * Function for comprehend two humans
      * in repository on date of birth
+     *
      * @param o1 - first human, who we comprehend
      * @param o2 - second human, who we comprehend
      * @return return 1, if date of birth of first human more, than second one

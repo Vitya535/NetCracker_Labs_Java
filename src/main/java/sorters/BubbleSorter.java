@@ -1,4 +1,5 @@
 package sorters;
+
 import human.Human;
 import org.apache.log4j.Logger;
 import repository.RepositoryForHumans;
@@ -7,19 +8,22 @@ import java.util.Comparator;
 
 /**
  * BubbleSorter Class for repository  {@link RepositoryForHumans}
+ *
+ * @author Kushnerenko Victor
  * @see Sorter
  * @see InsertSorter
  * @see ShellSorter
- * @author Kushnerenko Victor
- * @version 1.2
  */
 public class BubbleSorter implements Sorter {
 
-    /** private object of class Logger for logging class BubbleSorter*/
+    /**
+     * private object of class Logger for logging class BubbleSorter
+     */
     private static final Logger logger = Logger.getLogger(Sorter.class);
 
     /**
      * Function for bubblesort people in repository
+     *
      * @param repository - repository, which we want to sort {@link RepositoryForHumans}
      * @param comparator - comparator, by which we want to sort people {@link Comparator}
      * @see BubbleSorter#sort(RepositoryForHumans, Comparator)

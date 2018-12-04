@@ -18,44 +18,58 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Unit-tests on JUnit 5.2 for repository with humans {@link RepositoryForHumans}
+ *
  * @author Kushnerenko Victor
- * @version 1.2
  */
 class RepositoryTest {
 
-    /** private field for object of repository special for tests */
+    /**
+     * private field for object of repository special for tests
+     */
     private static RepositoryForHumans repository;
 
-    /** private field for object of datetimeformatter special for tests */
+    /**
+     * private field for object of datetimeformatter special for tests
+     */
     private static DateTimeFormatter formatter;
 
-    /** initializing data for tests */
+    /**
+     * initializing data for tests
+     */
     @BeforeAll
     static void initTest() {
         formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     }
 
-    /** clear objects after all tests */
+    /**
+     * clear objects after all tests
+     */
     @AfterAll
     static void afterTest() {
         repository = null;
         formatter = null;
     }
 
-    /** initializing repository before each test */
+    /**
+     * initializing repository before each test
+     */
     @BeforeEach
     void beforeEachTest() {
         repository = new RepositoryForHumans();
     }
 
-    /** printing repository after each test */
+    /**
+     * printing repository after each test
+     */
     @AfterEach
     void afterEachTest() {
         System.out.println(repository);
         repository = null;
     }
 
-    /** testing count function at addition similar people */
+    /**
+     * testing count function at addition similar people
+     */
     @Test
     void testCountWithSameHumans() {
         int expected = 1;
@@ -72,7 +86,9 @@ class RepositoryTest {
         assertEquals(expected, actual);
     }
 
-    /** testing count function at addition different people */
+    /**
+     * testing count function at addition different people
+     */
     @Test
     void testCountWithDifferentHumans() {
         int expected = 3;
@@ -89,7 +105,9 @@ class RepositoryTest {
         assertEquals(expected, actual);
     }
 
-    /** testing function getting sorter */
+    /**
+     * testing function getting sorter
+     */
     @Test
     void testGetSorter() {
         Sorter expected = new ShellSorter();
@@ -98,7 +116,9 @@ class RepositoryTest {
         System.out.println(actual);
     }
 
-    /** testing function setting sorter */
+    /**
+     * testing function setting sorter
+     */
     @Test
     void testSetSorter() {
         Sorter expected = new BubbleSorter();
@@ -108,7 +128,9 @@ class RepositoryTest {
         System.out.println(actual);
     }
 
-    /** testing function - add human to repository */
+    /**
+     * testing function - add human to repository
+     */
     @Test
     void testAdd() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -116,7 +138,9 @@ class RepositoryTest {
         repository.add(newHuman);
     }
 
-    /** testing function - add similar humans to repository */
+    /**
+     * testing function - add similar humans to repository
+     */
     @Test
     void testAddSameHumans() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -130,7 +154,9 @@ class RepositoryTest {
         repository.add(newHuman_3);
     }
 
-    /** testing function - add different humans to repository */
+    /**
+     * testing function - add different humans to repository
+     */
     @Test
     void testAddDifferentHumans() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -145,7 +171,9 @@ class RepositoryTest {
     }
 
 
-    /** testing function - add array of different humans to repository */
+    /**
+     * testing function - add array of different humans to repository
+     */
     @Test
     void testAddRangeDifferentHumans() {
         DateTime dateOfBirth1 = formatter.parseDateTime("14.05.1997");
@@ -155,7 +183,9 @@ class RepositoryTest {
         repository.addRange(new Human[]{newHuman1, newHuman2});
     }
 
-    /** testing function - add array of similar humans to repository */
+    /**
+     * testing function - add array of similar humans to repository
+     */
     @Test
     void testAddRangeSimilarHumans() {
         DateTime dateOfBirth1 = formatter.parseDateTime("14.05.1997");
@@ -165,7 +195,9 @@ class RepositoryTest {
         repository.addRange(new Human[]{newHuman1, newHuman2});
     }
 
-    /** testing function - remove concrete human */
+    /**
+     * testing function - remove concrete human
+     */
     @Test
     void testRemove() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -181,7 +213,9 @@ class RepositoryTest {
         repository.remove(new Human("Пупкин", "Василий", "Семенович", dateOfBirth_2, Gender.MALE));
     }
 
-    /** testing function - remove concrete not existing human */
+    /**
+     * testing function - remove concrete not existing human
+     */
     @Test
     void testRemoveNotExistingHuman() throws Exception {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -200,7 +234,9 @@ class RepositoryTest {
         //assertNotNull(thrown.getMessage());
     }
 
-    /** testing function - remove concrete human on index */
+    /**
+     * testing function - remove concrete human on index
+     */
     @Test
     void testRemoveAt() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -216,7 +252,9 @@ class RepositoryTest {
         repository.removeAt(0);
     }
 
-    /** testing function - remove concrete not existing human on index */
+    /**
+     * testing function - remove concrete not existing human on index
+     */
     @Test
     void testRemoveAtNotExistingHuman() throws ArrayIndexOutOfBoundsException {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -227,7 +265,9 @@ class RepositoryTest {
         assertNotNull(thrown.getMessage());
     }
 
-    /** testing function - get information about human on index */
+    /**
+     * testing function - get information about human on index
+     */
     @Test
     void testGet() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -237,7 +277,9 @@ class RepositoryTest {
         repository.get(0);
     }
 
-    /** testing function - get information about not existing human on index */
+    /**
+     * testing function - get information about not existing human on index
+     */
     @Test
     void testGetNotExistingHuman() throws ArrayIndexOutOfBoundsException {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -249,7 +291,9 @@ class RepositoryTest {
         //assertNotNull(thrown.getMessage());
     }
 
-    /** testing function - set new human on existing position */
+    /**
+     * testing function - set new human on existing position
+     */
     @Test
     void testSet() {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -261,7 +305,9 @@ class RepositoryTest {
         repository.set(0, newHuman_3);
     }
 
-    /** testing function - set new human on not existing position */
+    /**
+     * testing function - set new human on not existing position
+     */
     @Test
     void testSetNotExistingHuman() throws Exception {
         DateTime dateOfBirth = formatter.parseDateTime("14.05.1997");
@@ -275,7 +321,9 @@ class RepositoryTest {
         //assertNotNull(thrown.getMessage());
     }
 
-    /** test finding on surname in repository */
+    /**
+     * test finding on surname in repository
+     */
     @Test
     void testFindOnSurname() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("14.05.1997");
@@ -295,7 +343,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test finding on date of birth in repository */
+    /**
+     * test finding on date of birth in repository
+     */
     @Test
     void testFindOnDateOfBirth() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
@@ -314,7 +364,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test finding on age in repository */
+    /**
+     * test finding on age in repository
+     */
     @Test
     void testFindOnAge() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
@@ -333,7 +385,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test finding on not existing surname in repository */
+    /**
+     * test finding on not existing surname in repository
+     */
     @Test
     void testFindOnSurnameNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
@@ -352,7 +406,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test finding on not existing date of birth in repository */
+    /**
+     * test finding on not existing date of birth in repository
+     */
     @Test
     void testFindOnDateOfBirthNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
@@ -371,7 +427,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test finding on not existing age in repository */
+    /**
+     * test finding on not existing age in repository
+     */
     @Test
     void testFindOnAgeNothing() {
         DateTime dateOfBirth_1 = formatter.parseDateTime("12.07.1997");
@@ -390,7 +448,9 @@ class RepositoryTest {
         System.out.println(find_rep);
     }
 
-    /** test bubblesort on surname in repository */
+    /**
+     * test bubblesort on surname in repository
+     */
     @Test
     void testBubbleSortSurname() {
         repository.setSorter(new BubbleSorter());
@@ -410,7 +470,9 @@ class RepositoryTest {
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** test insertsort on surname in repository */
+    /**
+     * test insertsort on surname in repository
+     */
     @Test
     void testInsertSortSurname() {
         repository.setSorter(new InsertSorter());
@@ -430,7 +492,9 @@ class RepositoryTest {
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** test shellsort on surname in repository */
+    /**
+     * test shellsort on surname in repository
+     */
     @Test
     void testShellSortSurname() {
         repository.setSorter(new ShellSorter());
@@ -450,7 +514,9 @@ class RepositoryTest {
         repository.sortBy(new HumanSurnameComparator());
     }
 
-    /** test bubblesort on date of birth in repository */
+    /**
+     * test bubblesort on date of birth in repository
+     */
     @Test
     void testBubbleSortDateOfBirth() {
         repository.setSorter(new BubbleSorter());
@@ -470,7 +536,9 @@ class RepositoryTest {
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** test insertsort on date of birth in repository */
+    /**
+     * test insertsort on date of birth in repository
+     */
     @Test
     void testInsertSortDateOfBirth() {
         repository.setSorter(new InsertSorter());
@@ -490,7 +558,9 @@ class RepositoryTest {
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** test shellsort on date of birth in repository */
+    /**
+     * test shellsort on date of birth in repository
+     */
     @Test
     void testShellSortDateOfBirth() {
         repository.setSorter(new ShellSorter());
@@ -510,7 +580,9 @@ class RepositoryTest {
         repository.sortBy(new HumanDateOfBirthComparator());
     }
 
-    /** test bubblesort on age in repository */
+    /**
+     * test bubblesort on age in repository
+     */
     @Test
     void testBubbleSortAge() {
         repository.setSorter(new BubbleSorter());
@@ -530,7 +602,9 @@ class RepositoryTest {
         repository.sortBy(new HumanAgeComparator());
     }
 
-    /** test insertsort on age in repository */
+    /**
+     * test insertsort on age in repository
+     */
     @Test
     void testInsertSortAge() {
         repository.setSorter(new InsertSorter());
@@ -550,7 +624,9 @@ class RepositoryTest {
         repository.sortBy(new HumanAgeComparator());
     }
 
-    /** test shellsort on age in repository */
+    /**
+     * test shellsort on age in repository
+     */
     @Test
     void testShellSortAge() {
         repository.setSorter(new ShellSorter());
