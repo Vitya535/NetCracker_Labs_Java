@@ -8,19 +8,22 @@ import java.util.Comparator;
 
 /**
  * InsertSorter class for repository {@link RepositoryForHumans}
+ *
+ * @author Kushnerenko Victor
  * @see BubbleSorter
  * @see Sorter
  * @see ShellSorter
- * @author Kushnerenko Victor
- * @version 1.2
  */
-public class InsertSorter implements Sorter{
+public class InsertSorter implements Sorter {
 
-    /** private object of class Logger for logging class InsertSorter*/
+    /**
+     * private object of class Logger for logging class InsertSorter
+     */
     private static final Logger logger = Logger.getLogger(Sorter.class);
 
     /**
      * InsertSort Function for sort repository of people
+     *
      * @param repository - repository, which we want to sort {@link RepositoryForHumans}
      * @param comparator - comparator, by which we want to sort people {@link Comparator}
      * @see BubbleSorter#sort(RepositoryForHumans, Comparator)
@@ -34,7 +37,7 @@ public class InsertSorter implements Sorter{
             int j;
             Human buf = repository.get(i);
             for (j = i - 1; j >= 0; j--) {
-                if (comparator.compare(repository.get(j),buf) < 0) {
+                if (comparator.compare(repository.get(j), buf) < 0) {
                     break;
                 }
                 repository.set(j + 1, repository.get(j));

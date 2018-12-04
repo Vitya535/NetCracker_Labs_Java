@@ -3,25 +3,27 @@ package sorters;
 import human.Human;
 import org.apache.log4j.Logger;
 import repository.RepositoryForHumans;
-import utils.Utils;
 
 import java.util.Comparator;
 
 /**
  * ShellSorter Class for repository {@link RepositoryForHumans}
+ *
+ * @author Kushnerenko Victor
  * @see BubbleSorter
  * @see InsertSorter
  * @see Sorter
- * @author Kushnerenko Victor
- * @version 1.2
  */
 public class ShellSorter implements Sorter {
 
-    /** private object of class Logger for logging class ShellSorter*/
+    /**
+     * private object of class Logger for logging class ShellSorter
+     */
     private static final Logger logger = Logger.getLogger(Sorter.class);
 
     /**
      * Function for shellsort people in repository
+     *
      * @param repository - repository, which we want to sort {@link RepositoryForHumans}
      * @param comparator - comparator, by which we want to sort people {@link Comparator}
      * @see BubbleSorter#sort(RepositoryForHumans, Comparator)

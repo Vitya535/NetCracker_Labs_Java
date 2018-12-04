@@ -10,21 +10,20 @@ import static java.lang.String.join;
 
 /**
  * Class of human with id, full name, date of birth, age
+ *
  * @author Kushnerenko Victor
- * @version 1.2
  */
-public class Human
-{
+public class Human {
     /**
      * Constructor for creating humans
-     * @param surname - the human surname
-     * @param name - the human name
-     * @param patronymic - the human patronymic
+     *
+     * @param surname     - the human surname
+     * @param name        - the human name
+     * @param patronymic  - the human patronymic
      * @param dateOfBirth - the human date of birth
-     * @param gender - the gender of human
+     * @param gender      - the gender of human
      */
-    public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Gender gender)
-    {
+    public Human(String surname, String name, String patronymic, DateTime dateOfBirth, Gender gender) {
         logger.debug("init human object with params: " + join(",", surname, name, patronymic, dateOfBirth.toString(), gender.toString()));
         this.name = name;
         this.surname = surname;
@@ -33,14 +32,19 @@ public class Human
         this.gender = gender;
     }
 
-    /** private object of class Logger for logging class Human */
+    /**
+     * private object of class Logger for logging class Human
+     */
     private static final Logger logger = Logger.getLogger(Human.class);
 
-    /** the field ID */
+    /**
+     * the field ID
+     */
     private int id;
 
     /**
      * Function, returning the value of field {@link Human#id}
+     *
      * @return returns human ID
      */
     public int getId() {
@@ -50,6 +54,7 @@ public class Human
 
     /**
      * Function for define the value of field {@link Human#id}
+     *
      * @param id - new human ID
      */
     public void setId(int id) {
@@ -57,11 +62,14 @@ public class Human
         this.id = id;
     }
 
-    /** field for name of human */
+    /**
+     * field for name of human
+     */
     private String name;
 
     /**
      * Function, returning the value of field {@link Human#name}
+     *
      * @return returns human name
      */
     public String getName() {
@@ -71,6 +79,7 @@ public class Human
 
     /**
      * Function for define the value of field {@link Human#name}
+     *
      * @param name - new human name
      */
     public void setName(String name) {
@@ -78,11 +87,14 @@ public class Human
         this.name = name;
     }
 
-    /** field for human surname */
+    /**
+     * field for human surname
+     */
     private String surname;
 
     /**
      * Function, returning the value of field {@link Human#surname}
+     *
      * @return returns human surname
      */
     public String getSurname() {
@@ -92,6 +104,7 @@ public class Human
 
     /**
      * Function for define the value of field {@link Human#surname}
+     *
      * @param surname - new surname of human
      */
     public void setSurname(String surname) {
@@ -99,11 +112,14 @@ public class Human
         this.surname = surname;
     }
 
-    /** field for human patronymic */
+    /**
+     * field for human patronymic
+     */
     private String patronymic;
 
     /**
      * Function, returning the value of field {@link Human#patronymic}
+     *
      * @return returns human patronymic
      */
     public String getPatronymic() {
@@ -113,6 +129,7 @@ public class Human
 
     /**
      * Function for define the value of field {@link Human#patronymic}
+     *
      * @param patronymic - new human patronymic
      */
     public void setPatronymic(String patronymic) {
@@ -122,19 +139,22 @@ public class Human
 
     /**
      * Function, returning the value of fields {@link Human#surname}, {@link Human#name}, {@link Human#patronymic}
+     *
      * @return returns full name of human in nominative case
      */
-    public String getFIO()
-    {
+    public String getFIO() {
         logger.debug("get full name of human");
         return join(" ", surname, name, patronymic);
     }
 
-    /** field for date of birth */
+    /**
+     * field for date of birth
+     */
     private DateTime dateOfBirth;
 
     /**
      * Function, returning the value of field {@link Human#dateOfBirth}
+     *
      * @return return human date of birth
      */
     public DateTime getDateOfBirth() {
@@ -144,6 +164,7 @@ public class Human
 
     /**
      * Function for define the value of field {@link Human#dateOfBirth}
+     *
      * @param dateOfBirth - new date of birth for human
      */
     public void setDateOfBirth(DateTime dateOfBirth) {
@@ -151,11 +172,14 @@ public class Human
         this.dateOfBirth = dateOfBirth;
     }
 
-    /** field for defining gender of human */
+    /**
+     * field for defining gender of human
+     */
     private Gender gender;
 
     /**
      * Function for getting gender of human
+     *
      * @return return gender of human
      */
     public Gender getGender() {
@@ -165,6 +189,7 @@ public class Human
 
     /**
      * Function for setting gender of human
+     *
      * @param gender - gender, which sets to human
      */
     public void setGender(Gender gender) {
@@ -175,10 +200,10 @@ public class Human
     /**
      * Function, returning the difference of human date of birth {@link Human#dateOfBirth}
      * and current time
+     *
      * @return return age of human
      */
-    public int getAge()
-    {
+    public int getAge() {
         logger.debug("get age of human");
         DateTime now = DateTime.now();
         Period difference = new Period(this.dateOfBirth, now);
@@ -187,6 +212,7 @@ public class Human
 
     /**
      * Function, which representing string view of human object
+     *
      * @return return object view in string format
      */
     @Override
@@ -204,6 +230,7 @@ public class Human
 
     /**
      * Override method equals for human class
+     *
      * @param o - object of class Object (for us it's human class {@link Human}
      * @return return value, which define is objects equal or not
      */
@@ -222,6 +249,7 @@ public class Human
 
     /**
      * Override method hashCode for human class
+     *
      * @return return hashCode of human object
      */
     @Override
