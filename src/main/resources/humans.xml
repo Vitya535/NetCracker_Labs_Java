@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Humans>
+    <Human>
+        <id>1</id>
+        <name>Виктор</name>
+        <surname>Кушнеренко</surname>
+        <patronymic>Константинович</patronymic>
+        <dateOfBirth>21.03.2012</dateOfBirth>
+        <gender>Мужской</gender>
+    </Human>
+    <Human>
+        <id>2</id>
+        <name>Денис</name>
+        <surname>Удальцов</surname>
+        <patronymic>Игоревич</patronymic>
+        <dateOfBirth>20.02.1998</dateOfBirth>
+        <gender>Мужской</gender>
+    </Human>
+    <Human>
+        <id>3</id>
+        <name>Илья</name>
+        <surname>Веселов</surname>
+        <patronymic>Александрович</patronymic>
+        <dateOfBirth>19.11.1997</dateOfBirth>
+        <gender>Мужской</gender>
+    </Human>
+    <Human>
+        <id>4</id>
+        <name>Сергей</name>
+        <surname>Константинов</surname>
+        <patronymic>Дмитриевич</patronymic>
+        <dateOfBirth>17.09.1996</dateOfBirth>
+        <gender>Мужской</gender>
+    </Human>
+</Humans>

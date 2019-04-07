@@ -62,6 +62,7 @@ public class RepositoryForHumans {
         arrayOfHumans = new Human[0];
         repCount = 0;
         (new Injector()).inject(this);
+        System.out.println(sorter);
     }
 
     /**

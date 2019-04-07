@@ -4,6 +4,12 @@ import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
 import static java.lang.String.join;
@@ -13,7 +19,42 @@ import static java.lang.String.join;
  *
  * @author Kushnerenko Victor
  */
+@XmlRootElement(name = "Human")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Human {
+    /**
+     * private object of class Logger for logging class Human
+     */
+    private static final Logger logger = Logger.getLogger(Human.class);
+    /**
+     * the field ID
+     */
+    private int id;
+    /**
+     * field for name of human
+     */
+    private String name;
+    /**
+     * field for human surname
+     */
+    private String surname;
+    /**
+     * field for human patronymic
+     */
+    private String patronymic;
+    /**
+     * field for date of birth
+     */
+    private DateTime dateOfBirth;
+    /**
+     * field for defining gender of human
+     */
+    private Gender gender;
+
+    public Human() {
+
+    }
+
     /**
      * Constructor for creating humans
      *
@@ -31,16 +72,6 @@ public class Human {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
-
-    /**
-     * private object of class Logger for logging class Human
-     */
-    private static final Logger logger = Logger.getLogger(Human.class);
-
-    /**
-     * the field ID
-     */
-    private int id;
 
     /**
      * Function, returning the value of field {@link Human#id}
@@ -63,11 +94,6 @@ public class Human {
     }
 
     /**
-     * field for name of human
-     */
-    private String name;
-
-    /**
      * Function, returning the value of field {@link Human#name}
      *
      * @return returns human name
@@ -88,11 +114,6 @@ public class Human {
     }
 
     /**
-     * field for human surname
-     */
-    private String surname;
-
-    /**
      * Function, returning the value of field {@link Human#surname}
      *
      * @return returns human surname
@@ -111,11 +132,6 @@ public class Human {
         logger.debug("set surname of human: " + surname);
         this.surname = surname;
     }
-
-    /**
-     * field for human patronymic
-     */
-    private String patronymic;
 
     /**
      * Function, returning the value of field {@link Human#patronymic}
@@ -148,11 +164,6 @@ public class Human {
     }
 
     /**
-     * field for date of birth
-     */
-    private DateTime dateOfBirth;
-
-    /**
      * Function, returning the value of field {@link Human#dateOfBirth}
      *
      * @return return human date of birth
@@ -171,11 +182,6 @@ public class Human {
         logger.debug("set date of birth of human: " + dateOfBirth);
         this.dateOfBirth = dateOfBirth;
     }
-
-    /**
-     * field for defining gender of human
-     */
-    private Gender gender;
 
     /**
      * Function for getting gender of human
@@ -223,7 +229,7 @@ public class Human {
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
-                ", dateOfBirth=" + dateOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
                 ", gender=" + gender +
                 '}';
     }

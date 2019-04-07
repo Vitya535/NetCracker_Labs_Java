@@ -1,6 +1,9 @@
 package config;
 
 
+import org.apache.log4j.Logger;
+import repository.RepositoryForHumans;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -15,6 +18,11 @@ import java.util.Properties;
  * @author Kushnerenko Victor
  */
 public class Injector {
+    /**
+     * private object of class Logger for logging class RepositoryForHumans
+     */
+    private static final Logger logger = Logger.getLogger(RepositoryForHumans.class);
+
 
     /**
      * That method injects object fields, which marked with annotation {@link AutoInjectable}
@@ -22,8 +30,10 @@ public class Injector {
      * @param object - object, whose fields or field need to dynamically inject
      */
     public void inject(Object object) {
+        logger.debug("method inject invoked with params: " + object);
         Class objectClass = object.getClass();
         Field[] objectFields = objectClass.getDeclaredFields();
+        logger.info("reading .properties file");
         Properties properties = new Properties();
         FileInputStream fis;
         try {
@@ -32,6 +42,7 @@ public class Injector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.info("inject fields of object");
         for (Field objectField : objectFields) {
             if (objectField.isAnnotationPresent(AutoInjectable.class)) {
                 for (Map.Entry<Object, Object> entry : properties.entrySet()) {
