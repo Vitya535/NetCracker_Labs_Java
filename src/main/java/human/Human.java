@@ -3,13 +3,9 @@ package human;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+import xml_parsing.DateTimeAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Objects;
 
 import static java.lang.String.join;
@@ -19,8 +15,6 @@ import static java.lang.String.join;
  *
  * @author Kushnerenko Victor
  */
-@XmlRootElement(name = "Human")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Human {
     /**
      * private object of class Logger for logging class Human
@@ -168,6 +162,7 @@ public class Human {
      *
      * @return return human date of birth
      */
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     public DateTime getDateOfBirth() {
         logger.debug("get date of birth of human");
         return dateOfBirth;

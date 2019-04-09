@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 
 public class DOMConvertXmlToStudents {
 
-    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy.MM.dd");
 
     public static Human getHuman(Node node) {
         Human human = new Human();
@@ -23,9 +23,9 @@ public class DOMConvertXmlToStudents {
             human.setDateOfBirth(formatter.parseDateTime(getTagValue("dateOfBirth", element)));
 
             String genderElement = getTagValue("gender", element);
-            if ("Мужской".equals(genderElement)) {
+            if ("MALE".equals(genderElement)) {
                 human.setGender(Gender.MALE);
-            } else if ("Женский".equals(genderElement)) {
+            } else if ("FEMALE".equals(genderElement)) {
                 human.setGender(Gender.FEMALE);
             }
         }

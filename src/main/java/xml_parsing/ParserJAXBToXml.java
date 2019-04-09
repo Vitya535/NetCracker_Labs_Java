@@ -1,24 +1,23 @@
 package xml_parsing;
 
-import human.Humans;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import repository.RepositoryForHumans;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.StringWriter;
 
-public class JAXBConvertStudentsToXml {
+public class ParserJAXBToXml implements ParseableToXml {
 
-    public static String convertStudentsToXml(Humans humans) {
+    @Override
+    public String convertStudentsToXml(RepositoryForHumans repository) {
         StringWriter writer = new StringWriter();
         JAXBContext context;
         try {
-            context = JAXBContext.newInstance(Humans.class);
+            context = JAXBContext.newInstance(RepositoryForHumans.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(humans, writer);
+            marshaller.marshal(repository, writer);
         } catch (JAXBException e) {
             e.printStackTrace();
         }

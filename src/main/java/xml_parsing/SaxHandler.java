@@ -6,14 +6,12 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.util.ArrayList;
-import java.util.List;
+import repository.RepositoryForHumans;
 
 public class SaxHandler extends DefaultHandler {
 
-    public static List<Human> humans = new ArrayList<>();
-    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+    public static RepositoryForHumans repository = new RepositoryForHumans(new Human[0]);
+    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy.MM.dd");
     private Human human = new Human();
     private String thisElement = "";
 
@@ -29,7 +27,7 @@ public class SaxHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
         thisElement = "";
         if ("Human".equals(qName)) {
-            humans.add(human);
+            repository.add(human);
         }
     }
 
@@ -53,9 +51,9 @@ public class SaxHandler extends DefaultHandler {
                 break;
             case "gender":
                 String genderElement = new String(ch, start, length);
-                if ("Мужской".equals(genderElement)) {
+                if ("MALE".equals(genderElement)) {
                     human.setGender(Gender.MALE);
-                } else if ("Женский".equals(genderElement)) {
+                } else if ("FEMALE".equals(genderElement)) {
                     human.setGender(Gender.FEMALE);
                 }
                 break;

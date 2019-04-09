@@ -13,6 +13,10 @@ import sorters.ShellSorter;
 import sorters.Sorter;
 import utils.Utils;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.IntStream;
@@ -22,6 +26,8 @@ import java.util.stream.IntStream;
  *
  * @author Kushnerenko Victor
  */
+@XmlType(propOrder = {"arrayOfHumans"})
+@XmlRootElement(name = "Repository")
 public class RepositoryForHumans {
     /**
      * private object of class Logger for logging class RepositoryForHumans
@@ -131,6 +137,7 @@ public class RepositoryForHumans {
      *
      * @return return Sorter of repository
      */
+    @XmlTransient
     public Sorter getSorter() {
         logger.debug("get sorter of repository");
         return sorter;
@@ -377,5 +384,15 @@ public class RepositoryForHumans {
     public int hashCode() {
         logger.debug("method hashCode invoked");
         return Arrays.hashCode(arrayOfHumans);
+    }
+
+
+    @XmlElement(name = "Human")
+    public Human[] getArrayOfHumans() {
+        return arrayOfHumans;
+    }
+
+    public void setArrayOfHumans(Human[] arrayOfHumans) {
+        this.arrayOfHumans = arrayOfHumans;
     }
 }
