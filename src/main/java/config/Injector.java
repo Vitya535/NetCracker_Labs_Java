@@ -1,7 +1,7 @@
 package config;
 
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import repository.RepositoryForHumans;
 
 import java.io.FileInputStream;
@@ -21,7 +21,7 @@ public class Injector {
     /**
      * private object of class Logger for logging class RepositoryForHumans
      */
-    private static final Logger logger = Logger.getLogger(RepositoryForHumans.class);
+    private static final Logger logger = LogManager.getLogger(RepositoryForHumans.class);
 
 
     /**

@@ -1,7 +1,8 @@
 package utils;
 
 import human.Human;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 
@@ -15,7 +16,7 @@ public class Utils {
     /**
      * private object of class Logger for logging class Utils
      */
-    private static final Logger logger = Logger.getLogger(Utils.class);
+    private static final Logger logger = LogManager.getLogger(Utils.class);
 
     /**
      * Function, concat two arrays of people in one

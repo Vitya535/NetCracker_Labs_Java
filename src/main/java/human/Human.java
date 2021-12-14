@@ -1,6 +1,7 @@
 package human;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import xml_parsing.DateTimeAdapter;
@@ -19,7 +20,7 @@ public class Human {
     /**
      * private object of class Logger for logging class Human
      */
-    private static final Logger logger = Logger.getLogger(Human.class);
+    private static final Logger logger = LogManager.getLogger(Human.class);
     /**
      * the field ID
      */

@@ -5,7 +5,8 @@ import comparers.HumanDateOfBirthComparator;
 import comparers.HumanSurnameComparator;
 import human.Gender;
 import human.Human;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -24,7 +25,7 @@ class ConsoleForLabOne {
     /**
      * private object of class Logger for logging class ConsoleForLabOne
      */
-    private static final Logger logger = Logger.getLogger(ConsoleForLabOne.class);
+    private static final Logger logger = LogManager.getLogger(ConsoleForLabOne.class);
 
     /**
      * entry point of application

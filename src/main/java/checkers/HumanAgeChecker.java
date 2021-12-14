@@ -1,7 +1,8 @@
 package checkers;
 
 import human.Human;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class for finding people in repository
@@ -16,7 +17,7 @@ public class HumanAgeChecker implements Checker {
     /**
      * private object of class Logger for logging class HumanAgeChecker
      */
-    private static final Logger logger = Logger.getLogger(Checker.class);
+    private static final Logger logger = LogManager.getLogger(Checker.class);
 
     /**
      * Override method check for finding people in repository

@@ -1,7 +1,8 @@
 package sorters;
 
 import human.Human;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import repository.RepositoryForHumans;
 
 import java.util.Comparator;
@@ -19,7 +20,7 @@ public class ShellSorter implements Sorter {
     /**
      * private object of class Logger for logging class ShellSorter
      */
-    private static final Logger logger = Logger.getLogger(Sorter.class);
+    private static final Logger logger = LogManager.getLogger(Sorter.class);
 
     /**
      * Function for shellsort people in repository

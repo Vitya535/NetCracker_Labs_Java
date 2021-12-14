@@ -1,7 +1,8 @@
 package comparers;
 
 import human.Human;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Comparator;
 
@@ -18,7 +19,7 @@ public class HumanDateOfBirthComparator implements Comparator<Human> {
     /**
      * private object of class Logger for logging class HumanDateOfBirthComparator
      */
-    private static final Logger logger = Logger.getLogger(Comparator.class);
+    private static final Logger logger = LogManager.getLogger(Comparator.class);
 
     /**
      * Function for comprehend two humans
